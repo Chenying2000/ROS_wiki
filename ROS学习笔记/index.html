@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>ROS学习笔记 - My Docs</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">My Docs</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">Welcome to 318</a>
+                            </li>
+                            <li class="active">
+                                <a href="./">ROS学习笔记</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="..">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="disabled">
+                                <a rel="prev" >
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#ros">ROS学习笔记</a></li>
+        <li class="main "><a href="#rospython">一、ROS创建工作空间及功能包流程总结整理（python）</a></li>
+            <li><a href="#1">1、创建工作空间：</a></li>
+            <li><a href="#2">2、编译工作空间</a></li>
+            <li><a href="#3">3、创建功能包</a></li>
+            <li><a href="#4">4、编辑源文件</a></li>
+            <li><a href="#5camkelisttxt">5、编辑配置文件CamkeList.txt</a></li>
+            <li><a href="#6">6、进入工作空间目录并编译</a></li>
+            <li><a href="#7">7、进入工作空间目录并执行</a></li>
+        <li class="main "><a href="#ros_1">二、ROS通信机制：话题通信</a></li>
+            <li><a href="#1_1">1、通信机制及相关代码</a></li>
+            <li><a href="#2ros">2、ros的解耦合机制：</a></li>
+            <li><a href="#3_1">3、自定义发布消息类型：</a></li>
+        <li class="main "><a href="#ros_2">三、ROS通信机制：服务通信</a></li>
+            <li><a href="#1_2">1、服务通信机制及示意图</a></li>
+            <li><a href="#2_1">2、服务通信具体实现流程</a></li>
+        <li class="main "><a href="#ros_3">四、ROS通信机制：参数服务器</a></li>
+            <li><a href="#1_3">1、参数服务器的新增和修改</a></li>
+            <li><a href="#2_2">2、参数服务器获取参数（参数查询）</a></li>
+            <li><a href="#3_4">3、参数服务器删除参数</a></li>
+        <li class="main "><a href="#ros_4">五、ROS常用命令</a></li>
+        <li class="main "><a href="#ros_5">六、ROS通信机制实操案例：</a></li>
+            <li><a href="#demo-01">demo 01 控制小乌龟做圆周运动</a></li>
+            <li><a href="#demo-02">demo 02 订阅乌龟的位姿</a></li>
+            <li><a href="#demo-03">demo 03 通过服务通信实现在指定位置生成一只乌龟</a></li>
+            <li><a href="#demo-04">demo 04 修改背景参数</a></li>
+            <li><a href="#api">常用API介绍</a></li>
+            <li><a href="#python">自定义python模块的导入</a></li>
+        <li class="main "><a href="#ros_6">七、ROS运行管理</a></li>
+            <li><a href="#1_4">1、元功能包</a></li>
+            <li><a href="#2launchros">2、launch文件（ros节点管理）</a></li>
+            <li><a href="#3launch">3、launch标签知识点总结归纳</a></li>
+            <li><a href="#4ros">4、ROS中的重名问题</a></li>
+        <li class="main "><a href="#ros_7">八、ROS常用组件</a></li>
+            <li><a href="#1tf">1、TF坐标变换</a></li>
+            <li><a href="#2rosbag">2、rosbag节点录制与回放</a></li>
+            <li><a href="#3rqt">3、rqt工具箱</a></li>
+        <li class="main "><a href="#_4">九、机器人系统仿真</a></li>
+            <li><a href="#1urdfrviz">1、URDF集成rviz基本流程</a></li>
+            <li><a href="#2urdf">2、URDF文件编写语法</a></li>
+            <li><a href="#3rvizarbotix">3、在RVIZ中控制机器人运动（Arbotix）</a></li>
+            <li><a href="#4urdfgazebo">4、URDF集成Gazebo的基本流程</a></li>
+            <li><a href="#5gazebo">5、Gazebo导入自定义环境</a></li>
+            <li><a href="#6ros-control">6、机器人运动控制ROS-control</a></li>
+            <li><a href="#7rviz">7、综合运动控制：rviz里程计查看</a></li>
+            <li><a href="#8">8、综合运动控制：雷达信息仿真及显示</a></li>
+            <li><a href="#9">9、综合运动控制：摄像头信息仿真及显示</a></li>
+            <li><a href="#10kinect">10、综合运动控制：kinect深度相机仿真</a></li>
+        <li class="main "><a href="#_5">十、机器人导航仿真</a></li>
+            <li><a href="#1_7">1、导航定位方式：</a></li>
+            <li><a href="#2slam">2、导航实现：SLAM建图</a></li>
+            <li><a href="#3amcl">3、导航实现：amcl定位</a></li>
+            <li><a href="#4_1">4、导航实现之路径规划</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="ros">ROS学习笔记</h1>
+<p>参考资料：</p>
+<p>B站赵虚左：https://www.bilibili.com/video/BV1Ci4y1L7ZZ?p=19&amp;vd_source=a8e8676617fb04db42af59b530b145fd</p>
+<p>所用环境：linux20.04+ROS1 noetic</p>
+<p>demo案例：使用python实现ROS版本的hello world</p>
+<p>（ROS工作空间及功能包创建流程）</p>
+<h1 id="rospython">一、ROS创建工作空间及功能包流程总结整理（python）</h1>
+<h2 id="1">1、创建工作空间：</h2>
+<p>选取自己计算机的某个位置，新建一个文件夹作为自己的工作空间</p>
+<pre><code>mkdir -p demo_ws/src
+</code></pre>
+
+<p>这里的demo_ws是笔者工作空间的名称，读者可以自定义。一定要在工作空间中设置二级子文件夹并命名为src，作为代码空间用于存放后续编写的功能包源代码，名字不可以自定义。</p>
+<h2 id="2">2、编译工作空间</h2>
+<pre><code>catkin_make
+</code></pre>
+
+<p>正常情况下就可以看到终端输出一些日志并看到工作空间中出现build和devel两个新的文件夹，即编译成功。</p>
+<p><img alt="" src="../imag/1.png" /></p>
+<p>但是对于系统中安装了anaconda的用户，可能存在不止一个python。这时候很可能会因为ROS和anaconda中python版本冲突报错：Invoking “cmake” failed。出现该问题的用户只需要在编译时指名所用的python版本（命令如下）即可成功编译。</p>
+<pre><code>catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
+</code></pre>
+
+<h2 id="3">3、创建功能包</h2>
+<p>进入src文件夹中</p>
+<pre><code>cd src
+</code></pre>
+
+<p>创建功能包</p>
+<pre><code>catkin_create_pkg helloworld roscpp rospy std_msgs
+</code></pre>
+
+<p>helloworld是功能包名，功能包名可自行设置，后面需要跟上roscpp、rospy、std-msgs这些常用依赖。其中roscpp是使用C++实现的库，而rospy则是使用python实现的库，std_msgs是标准消息库，创建ROS功能包时，一般都会依赖这三个库实现。</p>
+<p>创建成功后可以在src目录下看到以功能包名字命名的文件夹和配置文件CMakelist.txt.</p>
+<p><img alt="" src="../imag/2.png" /></p>
+<h2 id="4">4、编辑源文件</h2>
+<h4 id="1ros">（1）进入ROS功能包</h4>
+<pre><code>cd helloworld
+</code></pre>
+
+<h4 id="2scripts">（2）添加scripts目录</h4>
+<p>我们后续的python源文件都存放在该scripts文件中</p>
+<pre><code>mkdir scripts
+</code></pre>
+
+<h4 id="3python">（3）新建一个python文件</h4>
+<pre><code>touch helloworld.py
+</code></pre>
+
+<p>进入新建的python文件，输入python代码</p>
+<pre><code>#! /usr/bin/env python
+
+&quot;&quot;&quot;
+    Python 版 HelloWorld
+
+&quot;&quot;&quot;
+#导包：
+import rospy
+#编写主入口：
+if __name__ == &quot;__main__&quot;:
+    #初始化ros节点
+    rospy.init_node(&quot;Hello&quot;)
+    #输出日志helloworld
+    rospy.loginfo(&quot;Hello World!!!!&quot;)
+</code></pre>
+
+<h4 id="4-python">（4）为 python 文件添加可执行权限</h4>
+<pre><code>chmod +x 自定义文件名.py
+</code></pre>
+
+<p>chmod是linux中用于改变文件权限的命令，文件有rwx，即读取（r）、写入（w）、执行（x）。我们后面需要执行python文件，所以这里需要打开该文件的执行权限。</p>
+<h2 id="5camkelisttxt">5、编辑配置文件CamkeList.txt</h2>
+<p>162—165行，将注释放开，并把自定义文件名填入。该配置可以为python文件选择合适的解释器，noetic版本之前的用户可能不需要配置也可以成功运行。</p>
+<pre><code>catkin_install_python(PROGRAMS scripts/自定义文件名.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+</code></pre>
+
+<h2 id="6">6、进入工作空间目录并编译</h2>
+<pre><code>cd 自定义空间名称
+catkin_make
+</code></pre>
+
+<h2 id="7">7、进入工作空间目录并执行</h2>
+<h4 id="11">（1）先启动命令行1：</h4>
+<pre><code>roscore
+</code></pre>
+
+<p>roscore用于启动ros核心，在ros中，所有的节点都是依赖于roscore</p>
+<h4 id="22">（2）再启动命令行2：</h4>
+<p>回到编译结束的窗口，进入开发空间（devel）执行setup.bash，这一步是为了刷新环境变量。</p>
+<p>执行文件命令：rosrun 功能包名 自定义文件名</p>
+<pre><code>cd 工作空间
+source ./devel/setup.bash
+rosrun helloworld helloworld.py
+</code></pre>
+
+<p>输出结果:<code>Hello World!!!!</code></p>
+<h1 id="ros_1">二、ROS通信机制：话题通信</h1>
+<h3 id="1_1">1、通信机制及相关代码</h3>
+<pre><code class="python">import rospy
+from std_msgs.msg import String #发布消息类型
+
+&quot;&quot;&quot;
+
+使用python实现消息的发布方的流程:
+
+1 导包
+2 初始化ros节点
+3 创建发布者对象
+4 编写发布逻辑并发布数据
+
+&quot;&quot;&quot;
+
+if __name__==&quot;__main__&quot;:
+    #初始化ros节点(传入节点名称即可)
+    rospy.init_node(&quot;huati&quot;)
+    #创建发布者对象
+    pub = rospy.Publisher(&quot;secret&quot;,String,queue_size=10)
+    #编写发布逻辑并发布数据
+    #创建数据
+    msg = String()
+    #指定发布频率
+    rate = rospy.Rate(1)#单位是Hz
+    #设置计数器
+    count = 0
+
+
+    #使用死循环发布数据
+    while not rospy.is_shutdown():#判断ros节点是否关闭，未关闭则输出false，关闭TRUE,这里没有关闭的时候进入循环体发布数据
+        count +=1
+        msg.data = &quot;hello&quot;+str(count)
+        #发布数据
+        pub.publish(msg)
+        #日志输出
+        rospy.loginfo(&quot;话题发布的数据是：%s&quot;,msg.data)
+        rate.sleep()#根据前面设置的rate，休眠一定时间，使程序按照指定频率输出相关消息
+#显示话题发布信息：rostopic echo secret，后面这个是话题发布方的名字
+</code></pre>
+
+<pre><code class="python">#导包
+import rospy
+from std_msgs.msg import String #导入消息格式
+
+def doMsg(msg):
+    rospy.loginfo(&quot;我订阅的数据：%s&quot;,msg.data)
+
+#编写程序主入口
+if __name__==&quot;__main__&quot;:
+    #初始化ros节点
+    rospy.init_node(&quot;huahua&quot;)
+    #创建订阅者对象
+    sub = rospy.Subscriber(&quot;secret&quot;,String,doMsg,queue_size=10)#注意大写
+    #回调函数
+    #在def doMsg
+    rospy.spin()#ros消息回调处理函数，加了这个订阅方才能收到消息
+
+</code></pre>
+
+<h3 id="2ros">2、ros的解耦合机制：</h3>
+<p>即使是不同语言编写的节点也可以互相通信，只要保证发布方和订阅方之间有相同的话题即可。</p>
+<h3 id="3_1">3、自定义发布消息类型：</h3>
+<p>​        在 ROS 通信协议中，数据载体是一个较为重要组成部分，在上一案例中，ROS 中通过 std_msgs 封装了一些原生的数据类型,比如:String、Int32、Int64、Char、Bool、Empty.... 但是，这些数据一般只包含一个 data 字段，结构的单一意味着功能上的局限性，当传输一些复杂的数据，比如: 激光雷达的信息... std_msgs 由于描述性较差而显得力不从心，这种场景下可以使用自定义的消息类型</p>
+<p>自定义消息类型，类似C语言中的结构体，在所用到的数据结构较为复杂的时候使用。</p>
+<p>结构是：数据类型 数据名称</p>
+<p>流程：</p>
+<h4 id="1msg">（1）新建msg文件</h4>
+<p>在功能包中新建一个msg文件，写上数据类型和数据名称</p>
+<pre><code>string name
+uint16 age
+float64 height
+</code></pre>
+
+<h4 id="2msg">（2）自定义msg文件所需相关配置</h4>
+<p>①创建完成后还不能单独使用，需要在package.xml中做相应配置，添加依赖“message_generation”消息生成，需要运行，所以需要导入message_runtime</p>
+<p><img alt="" src="../imag/3.png" /></p>
+<p>②配置CMakelist</p>
+<p>添加依赖包：message_generation</p>
+<p>这里find_package是在编译自定义功能包时，所依赖的现有功能包，如果这里添加的依赖包有问题，可能会在编译时报错。</p>
+<p><img alt="" src="../imag/4.png" /></p>
+<p>添加自定义message文件，将注释放开，并将示例文件名改为我们自定义的文件名“Person.msg“</p>
+<p><img alt="" src="../imag/5.png" /></p>
+<p><img alt="" src="../imag/6.png" /></p>
+<p>将generation message注释放开</p>
+<p><img alt="" src="../imag/7.png" /></p>
+<p>放开注释并添加message_runtime。<strong>这里的catkin_package与前文中的find_package是一种对应关系，自定义功能包依赖于find_package中的功能包，而find-package中的功能包又依赖于catkin_package中的功能包</strong>。他们之间是层层依赖的关系。如果这里添加的依赖包有问题，那么即使编译通过，运行时可能依然会出现报错。</p>
+<p><img alt="" src="../imag/8.png" /></p>
+<h4 id="3_2">（3）编译</h4>
+<p>ctrl+shift+B即开始编译功能包，未抛出异常即编译成功</p>
+<p>编译成功后会生成一些中间文件，我们进入工作空间下的开发空间（devel文件夹），可以看到lib文件夹下python3文件夹中生成了_Person.py文件，里面包含了刚才新建的几个量，后续就可以调用。
+<img alt="" src="../imag/9.png" /></p>
+<h1 id="ros_2">三、ROS通信机制：服务通信</h1>
+<h2 id="1_2">1、服务通信机制及示意图</h2>
+<p>服务通信适用于对实时性有要求，具有一定逻辑处理功能的应用场景。以请求相应的模式实现不同节点之间数据交互的一种通信方式。服务通信和话题通信的区别在于，服务通信是请求应答机制，当客户端发起请求时，服务端才会发送数据，而话题通信是订阅后，订阅方被动接收发布方所有信息。且服务通信机制是可以多对多的。</p>
+<p>服务通信机制示意图：
+<img alt="" src="../imag/10服务通信.jpg" /></p>
+<h2 id="2_1">2、服务通信具体实现流程</h2>
+<p><strong>demo：实现两个整型数相加求和，客户端发送两个整型数，服务端对其求和。</strong></p>
+<p>​        服务通信也需要自定义服务数据类型，即自定义srv文件，该过程和自定义msg文件非常类似。主要实现流程分为以下三步：①按照固定格式创建srv文件②编辑相关配置文件③编译生成中间文件</p>
+<p>​        开始之前首先要在工作空间中的src文件夹中新建一个功能包，可以用catkin_create_pkg 功能包名  依赖，建立一个新的功能包。这里我命名为server_client。</p>
+<h3 id="1srv">（1）按照固定格式创建srv文件</h3>
+<p>​        在新建功能包server_client中新建一个文件夹命名为srv,在srv文件中新建文件命名为AddInts.srv用于存放我们的消息载体。</p>
+<p><img alt="" src="../imag/11.jpg" /></p>
+<p>srv文件中存放的变量结构体按照请求和响应分为两部分，用---隔开</p>
+<p><img alt="" src="../imag/12srv文件变量定义结构.png" /></p>
+<h3 id="2packagexmlcmakelisttxt">（2）编辑配置文件package.xml和CMakelist.txt</h3>
+<p>①首先编辑package.xml文件</p>
+<p><img alt="" src="../imag/13修改配置文件.png" /></p>
+<p>②编辑CMakelist.txt文件</p>
+<p><img alt="" src="../imag/14修改配置文件.png" /></p>
+<p>注意下面这个不同于话题通信，需要配置srv相关部分，将注释放开，并把我们新建的AddInts.srv更换到文件下面</p>
+<p><img alt="" src="../imag/15srv配置.png" /></p>
+<p>将generate_messages注释放开，因为这里虽然我们的通信数据格式是自定义的，但是它的产生依然依赖于标准包std_msgs</p>
+<p><img alt="" src="../imag/16.png" /></p>
+<p>放开注释catkin_packages，类似话题通信，这里也是为了满足包之间的依赖关系。</p>
+<p><img alt="" src="../imag/17.png" /></p>
+<p>到这里呢，我们的配置就终于完成啦~接下来进入编译环节</p>
+<p>（3）编译生成中间文件</p>
+<pre><code>ctrl+shift+B
+</code></pre>
+
+<p>可以看到我们的编译并未抛出异常</p>
+<p><img alt="" src="../imag/18编译.png" /></p>
+<p>如果这里报错“Invoking “cmake”failed，很有可能是包名写错啦，回去检查一下重新编译就好啦</p>
+<h3 id="3_3">（3）编译生成中间文件</h3>
+<p>可以看到我们已经在开发空间devel中产生了一些后续被调用到的文件。这样我们的数据结构文件就配置好啦~可以进行下一步的开发咯</p>
+<p><img alt="" src="../imag/19编译产生文件.png" /></p>
+<h3 id="4srv">（4）自定义srv文件的调用</h3>
+<p>模型实现中：rosmaster可以通过roscore启动，建立连接的具体过程已被官方封装好</p>
+<p>我们需要做的工作主要分为以下三个部分：①服务端程序编写②客户端程序编写③数据</p>
+<h4 id="vscode">VScode配置</h4>
+<p>​        使用自定义srv文件时，需要对VScode进行一些配置，这样可以使VS提供对应的语法高亮，便于我们编程，也能防止VScode误抛异常。不配置也不影响使用。</p>
+<h4 id="_1">服务端代码实现</h4>
+<p>定位到功能包，新建文件夹scripts，新建文件server.py</p>
+<p>创建服务对象用到的函数rospy.Service（”话题名“，数据类型，回调函数），话题名自定义（服务端和客户端需要保持一致），数据类型取决于srv文件的自定义名称，回调函数自己编写和spin()成对出现。</p>
+<pre><code class="python">#! /usr/bin/env python
+import rospy
+from server_client.srv import AddInts,AddIntsRequest,AddIntsResponse
+#这里可以import*，不用写清楚具体的类和对象，这样会把该文件的所有对象都导入，但是要注意文件大的时候这样处理会变慢很多
+
+
+&quot;&quot;&quot;
+服务端：解析客户需求，产生响应
+1、导包
+2、初始化ros节点
+3、创建服务端对象
+4、数据处理逻辑(回调函数)
+5、spin()
+
+&quot;&quot;&quot;
+
+#参数：封装了请求数据
+#返回值：响应数据
+def doAdd(request):
+    #解析请求提交的两个数字
+    num1 = request.num1
+    num2 = request.num2
+    #对解析出的数字进行求和
+    sum = num1+num2
+    #创建响应对象，将返回值封装入响应对象
+    response = AddIntsResponse()
+    response.sum = sum
+    rospy.loginfo(&quot;服务器解析的数据是num1=%d,num2=%d,求和结果sum=%d&quot;,num1,num2,sum)
+    return response
+
+
+if __name__==&quot;__main__&quot;:
+    #初始化ROS节点
+    rospy.init_node(&quot;fuwu&quot;)
+    #创建服务对象,注意函数大小写,数据类型取决于srv文件的文件名
+    server = rospy.Service(&quot;addints&quot;,AddInts,doAdd)
+    rospy.loginfo(&quot;服务器已经启动了&quot;)
+    rospy.spin()
+</code></pre>
+
+<p>配置CMakelist.txt</p>
+<p><img alt="" src="../imag/20配置.jpg" /></p>
+<p>改变文件可执行权限，source刷新环境变量，rosrun运行，可以看到服务器启动了</p>
+<p><img alt="" src="../imag/21服务器启动.png" /></p>
+<p>客户端还未编写，我们这里可以用命令模拟客户端来测试服务端的功能,call后面要加自定义的建立通信链接的话题名,之后可以tab键自动补齐数据结构类型，手动修改数据并执行即可测试。</p>
+<pre><code>rosservice call addints &quot;num1:1,num2:2&quot;
+</code></pre>
+
+<p><img alt="" src="../imag/22成功执行.png" /></p>
+<h4 id="_2">客户端代码实现</h4>
+<p>定位到功能包，新建文件夹scripts，新建文件client.py</p>
+<p>创建客户对象用到的函数rospy.ServiceProxy（”话题名“，消息数据类型），话题名和服务端保持一致，数据类型同服务端，取决于srv文件，这里是AddInts。</p>
+<p>请求数据并发送请求：client.call(num1,num2)</p>
+<pre><code class="python">#! /usr/lib/env python
+import rospy
+from server_client.srv import AddInts,AddIntsRequest,AddIntsResponse
+&quot;&quot;&quot;
+1、导包
+2、初始化ros节点
+3、创建客户端对象
+4、组织请求数据,并发送请求
+5、处理响应
+&quot;&quot;&quot;
+
+if __name__==&quot;__main__&quot;:
+    rospy.init_node(&quot;kehu&quot;)
+    #创建客户端对象
+    client = rospy.ServiceProxy(&quot;addints&quot;,AddInts)
+    #组织请求数据,并发送请求
+    response = client.call(12,23)
+    #处理响应,这里直接打印一下
+    rospy.loginfo(&quot;响应求和之后的数据是%d&quot;,response.sum)
+
+</code></pre>
+
+<p>程序执行结果</p>
+<p><img alt="" src="../imag/23程序运行结果.jpg" /></p>
+<p>优化实现：
+可以在执行节点时，动态传入参数
+用到模块sys中的argv。这个可以包含节点名称和传入的数据</p>
+<pre><code class="python">#! /usr/lib/env python
+import rospy
+from server_client.srv import AddInts,AddIntsRequest,AddIntsResponse
+import sys
+
+&quot;&quot;&quot;
+1、导包
+2、初始化ros节点
+3、创建客户端对象
+4、组织请求数据,并发送请求
+5、处理响应
+
+
+问题：
+    当客户端先于服务端启动时,程序会抛出异常,但是ROS节点在启动时是没有先后顺序的,那么在程序执行过程中可能会出现一些问题
+解决方案：
+    当客户端先于服务端启动时，不要抛出异常，而是要挂起等待。等待服务器启动后，再次发送请求
+实现代码：
+    ROS中的内置函数，判断服务器的状态，服务端未启动时客户端挂起。
+    法一：client.wait_for_service()，不需要传入话题名称，它本身可以查找话题名
+    法二：rospy.wait_for_service(&quot;话题&quot;)rospy需要传入参数话题名称
+&quot;&quot;&quot;
+
+if __name__==&quot;__main__&quot;:
+
+    #判断参数长度,由于节点名也算一个参数，argv[0]是节点名，所以这里是3
+    if len(sys.argv)!=3:
+        rospy.logerr(&quot;传入的参数个数不对&quot;)
+        sys.exit(1)
+
+    rospy.init_node(&quot;kehu&quot;)
+    #创建客户端对象
+    client = rospy.ServiceProxy(&quot;addints&quot;,AddInts)
+    #组织请求数据,并发送请求，argv[1]这里是字符串类型，需要强行将其转换为int类型
+    num1 = int(sys.argv[1])
+    num2 = int(sys.argv[2])
+    #等待服务器启动
+    #client.wait_for_service()
+    #法二
+    rospy.wait_for_service(&quot;addints&quot;)
+    response = client.call(num1,num2)
+    #处理响应,这里直接打印一下
+    rospy.loginfo(&quot;响应求和之后的数据是%d&quot;,response.sum)
+</code></pre>
+
+<p>​        从程序执行结果可以看到，可以动态输入num1和num2，crtl C关闭服务端后，先执行客户端，客户端程序不会抛出异常而是会挂起等待，开启服务端后正常响应。</p>
+<p><img alt="" src="../imag/24 .png" /></p>
+<p><img alt="" src="../imag/25.png" /></p>
+<h1 id="ros_3">四、ROS通信机制：参数服务器</h1>
+<p>​       参数服务器在ROS中主要用于实现不同节点之间的数据共享。参数服务器相当于是独立于所有节点的一个公共容器，可以将数据存储在该容器中，被不同的节点调用，当然不同的节点也可以往其中存储数据，关于参数服务器的典型应用场景如下:</p>
+<blockquote>
+<p>导航实现时，会进行路径规划，比如: 全局路径规划，设计一个从出发点到目标点的大致路径。本地路径规划，会根据当前路况生成时时的行进路径，上述场景中，全局路径规划和本地路径规划时，就会使用到参数服务器：路径规划时，需要参考小车的尺寸，我们可以将这些尺寸信息存储到参数服务器，全局路径规划节 点与本地路径规划节点都可以从参数服务器中调用这些参数</p>
+</blockquote>
+<p>​     参数服务器，一般适用于存在数据共享的一些应用场景。存储一些多节点共享的数据，类似编程语言中的全局变量。</p>
+<p>参数服务器实现是最为简单的，该模型如下图所示,该模型中涉及到三个角色:</p>
+<ul>
+<li>ROS Master (管理者)</li>
+<li>Talker (参数设置者)</li>
+<li>Listener (参数调用者)</li>
+</ul>
+<p>ROS Master 作为一个公共容器保存参数，Talker 可以向容器中设置参数，Listener 可以获取参数。</p>
+<h2 id="1_3">1、参数服务器的新增和修改</h2>
+<pre><code class="python">#! /usr/bin/env python
+
+import rospy
+&quot;&quot;&quot;
+示例：服务器参数的新增与修改
+需求：在参数服务器中设置机器人的属性、型号、半径
+所用函数:rospy.set_param()
+
+
+&quot;&quot;&quot;
+if __name__==&quot;__main__&quot;:
+    #初始化ROS节点
+    rospy.init_node(&quot;param_set&quot;)
+    #新增参数,键值对（类似python字典语法）
+    rospy.set_param(&quot;name&quot;,&quot;car&quot;)
+    rospy.set_param(&quot;radius&quot;,0.15)
+</code></pre>
+
+<p>之后正常修改配置文件CMakelist，增加文件可执行权限，ctrl+shift+B编译，再sourece后执行文件即可执行成功，由于该程序没有日志输出，所以终端没有任何显示。</p>
+<p>我们可以通过ros命令来查看我们刚才设置的服务器参数和值</p>
+<p><strong>查看参数列表：rosparam list</strong></p>
+<p><strong>获取参数值：rosparam get 键名</strong></p>
+<p><img alt="" src="../imag/26set_param.jpg" /></p>
+<p>修改参数只需要用同样的函数输入键值然后传入新的参数即可。</p>
+<h2 id="2_2">2、参数服务器获取参数（参数查询）</h2>
+<p>可用函数：
+（1）get_param(键，默认值)当该键存在时返回它的值，不存在时会返回第二个参数设定的默认值
+（2）get_param_cached，和（1）相同，但是查询过会放在缓存中，下次不用反复到服务器查询，效率更高
+（3）get_param_names。列出当前参数列表，包括自定义的和系统自带的
+（4）has_param，查询某个参数是否存在，返回bool类型，是/否
+（5）search_param，查询某个参数是否存在，存在则返回键名</p>
+<pre><code class="python">#! /usr/lib/env python
+
+import rospy
+
+&quot;&quot;&quot;
+示例：参数的查询
+可用函数：
+get_param(键，默认值)当该键存在时返回它的值，不存在时会返回第二个参数设定的默认值
+get_param_cached
+get_param_names
+has_param
+search_param
+&quot;&quot;&quot;
+
+if __name__==&quot;__main__&quot;:
+    rospy.init_node(&quot;get_param&quot;)
+    radius = rospy.get_param(&quot;radius&quot;,0.5)
+    radius22 = rospy.get_param(&quot;radius22&quot;,0.6)
+    rospy.loginfo(&quot;radius的值是%.2f&quot;,radius)
+    rospy.loginfo(&quot;radius22的值是%.2f&quot;,radius22)
+
+    #get_param_cached 和get_param功能是完全一样的，但是cached查询过后会将结果放在缓存里，下次无需到服务器查询，效率更高。
+    radius = rospy.get_param_cached(&quot;radius&quot;,0.5)
+    radius22 = rospy.get_param_cached(&quot;radius22&quot;,0.6)
+    rospy.loginfo(&quot;radius的值是%.2f&quot;,radius)
+    rospy.loginfo(&quot;radius的值是%.2f&quot;,radius22)
+
+    #get_param_names,列出当前系统中的参数列表，包括自定义的和系统自带的
+    # names = rospy.get_param_names()
+    # for name in names:
+    #     rospy.loginfo = (&quot;name=%s&quot;,name)
+
+    #has_param,判断该参数是否存在
+    flag1 = rospy.has_param(&quot;radius&quot;)
+    if flag1:
+        rospy.loginfo(&quot;radius 存在&quot;)
+    else:
+        rospy.loginfo(&quot;radius 不存在&quot;)
+
+    #search_param,用于查询某个建是否存在，存在即返回键的名称
+    key = rospy.search_param(&quot;radius&quot;)
+    rospy.loginfo(&quot;key = %s&quot;,key)
+</code></pre>
+
+<p><img alt="" src="../imag/27get_param.jpg" /></p>
+<h2 id="3_4">3、参数服务器删除参数</h2>
+<p>使用函数：rospy.delete_param("radius")</p>
+<p>但是只使用这一句命令进行参数删除时，如果重复执行，就会报错，该参数不存在。故而这里用try：except，else语句进行处理，如果异常就输出该参数不存在，执行成功即输出该参数被成功删除。</p>
+<pre><code class="python">#! /usr/lib/env python
+
+import rospy
+&quot;&quot;&quot;
+示例：参数的删除
+函数：delete_param()
+&quot;&quot;&quot;
+if __name__ == &quot;__main__&quot;:
+    rospy.init_node(&quot;delete_param&quot;)
+    try:
+        rospy.delete_param(&quot;radius&quot;)
+    except Exception:
+        rospy.loginfo(&quot;不存在该参数或该参数已经被删除过了&quot;)
+    else:
+        rospy.loginfo(&quot;参数删除成功！&quot;)
+
+</code></pre>
+
+<p><img alt="" src="../imag/28删除参数.jpg" /></p>
+<h1 id="ros_4">五、ROS常用命令</h1>
+<p>本节中的ros命令是动态的，是在ros节点启动后动态的获取其相关参数信息的方式 </p>
+<p>1、rosnode：操作节点</p>
+<pre><code>rosnode ping    测试到节点的连接状态
+rosnode list    列出活动节点
+rosnode info    打印节点信息
+rosnode machine    列出指定设备上节点
+rosnode kill    杀死某个节点
+rosnode cleanup    清除不可连接的节点（ctrl+C退出后，roscore列表中仍然存在，该命令可以清除这些僵尸节点）
+</code></pre>
+
+<p>2、rostopic</p>
+<pre><code>rostopic bw 话题名    ：显示主题使用的带宽
+rostopic delay 话题名 ：显示带有 header 的主题延迟
+rostopic echo  话题名： 打印消息到屏幕
+rostopic find   根据类型查找主题
+rostopic hz     显示主题的发布频率
+rostopic info 话题名：  显示主题相关信息
+rostopic list   显示所有活动状态下的主题
+rostopic pub 话题名：将数据发布到主题，自定义消息按tab自动补齐，手动填入相关信息即可发布
+rostopic type   打印主题类型
+</code></pre>
+
+<p>3、rosmsg：</p>
+<pre><code>rosmsg show 包名/消息名称 ：   显示消息描述
+rosmsg info 包名/消息名称 ：  显示消息信息
+rosmsg list ：  列出所有消息
+rosmsg list |grep -i 消息名：使用管道列出该消息文件里的消息
+rosmsg md5    显示 md5 加密后的消息
+rosmsg package    显示某个功能包下的所有消息
+rosmsg packages    列出包含消息的功能包
+</code></pre>
+
+<p>4、rosservice：</p>
+<pre><code>rosservice args 服务名：打印服务参数
+rosservice call    使用提供的参数调用服务
+rosservice find    按照服务类型查找服务
+rosservice info 包名/服务名：   打印有关服务的信息
+rosservice list    列出所有活动的服务
+rosservice type    打印服务类型
+rosservice uri    打印服务的 ROSRPC uri
+</code></pre>
+
+<p>5、rosparam</p>
+<p>rosparam包含rosparam命令行工具，用于使用YAML编码文件在参数服务器上获取和设置ROS参数。</p>
+<pre><code>rosparam set    设置参数
+rosparam get    获取参数
+rosparam load    从外部文件加载参数
+rosparam dump    将参数写出到外部文件
+rosparam delete    删除参数
+rosparam list    列出所有参数
+</code></pre>
+
+<h1 id="ros_5">六、ROS通信机制实操案例：</h1>
+<h2 id="demo-01">demo 01 控制小乌龟做圆周运动</h2>
+<p>1、正常启动键盘控制乌龟节点：</p>
+<p>roscore——rosrun turtlesim turtlesim_node——rosrun turtlesim turtle_teleop_key</p>
+<p>2、用ros命令查看当前话题名和消息类型，方便下一步自行编码完成控制乌龟运动</p>
+<p>（1）rostopic list查看当前话题名称，rqt_graph查看计算图的结构，可以看到话题名</p>
+<p><img alt="" src="../imag/31计算图.png" /></p>
+<p>看到当前两个节点通信的话题是/turtle1/cmd_vel</p>
+<p>（2）获取话题的消息类型</p>
+<p>rostopic info </p>
+<p>rostopic type </p>
+<p><img alt="" src="../imag/32话题类型.png" /></p>
+<p>(3)获取消息格式</p>
+<p>rosmsg show/info</p>
+<p><img alt="" src="../imag/29消息格式.jpg" /></p>
+<p>线速度角速度的含义也讲了</p>
+<p>（4）控制乌龟运动完全类似话题发布方程序的编写</p>
+<pre><code class="python">#! /usr/bin/env python
+
+import rospy
+from geometry_msgs.msg import Twist
+
+&quot;&quot;&quot;
+发布方：
+需要获取话题名和消息类型
+话题：/turtle1/cmd_vel
+消息类型:geometry/Twist
+
+&quot;&quot;&quot;
+if __name__==&quot;__main__&quot;:
+    rospy.init_node(&quot;control&quot;)
+    #创建发布者对象
+    pub = rospy.Publisher(&quot;/turtle1/cmd_vel&quot;,Twist,queue_size=10)
+    #组织并发布数据
+    #设置发布频率
+    rate = rospy.Rate(10)
+    #创建速度消息
+    twist = Twist()
+    twist.angular.z = 1
+    twist.angular.x = 0
+    twist.angular.y = 0
+    twist.linear.x = 1
+    twist.linear.y = 0
+    twist.linear.z = 0
+    #循环发布数据
+    while not rospy.is_shutdown():
+        pub.publish(twist)
+        rate.sleep()
+</code></pre>
+
+<h2 id="demo-02">demo 02 订阅乌龟的位姿</h2>
+<p>完全类似话题订阅方程序的编写</p>
+<pre><code class="python">#! /usr/bin/env python
+import rospy
+from turtlesim.msg import Pose
+&quot;&quot;&quot;
+需求：订阅输出乌龟位资
+1、导包
+2、初始化ros节点
+3、创建订阅对象
+4、使用回调函数处理订阅到的消息
+5、spin
+&quot;&quot;&quot;
+def sub_pose(pose):
+    rospy.loginfo(&quot;乌龟位姿信息：坐标（%.2f,%.2f）,朝向：%.2f，线速度：%.2f，角速度：%.2f。&quot;,pose.x,pose.y,pose.theta,pose.linear_velocity,pose.angular_velocity)
+
+if __name__==&quot;__main__&quot;:
+    rospy.init_node(&quot;subpose&quot;)
+    sub = rospy.Subscriber(&quot;/turtle1/pose&quot;,Pose,sub_pose,queue_size = 100)
+    rospy.spin()
+</code></pre>
+
+<p>在这里编写程序有一个误区，误以为这个是和动作发布方直接通信的，所以话题一开始采用/turtle1/cmd_vel时一直报错，后来发现这个是订阅了/turtle1/pose话题，输出rqt图就可以非常清晰的看到这些节点之间的关系。</p>
+<p><img alt="" src="../imag/33订阅位姿.jpg" /></p>
+<h2 id="demo-03">demo 03 通过服务通信实现在指定位置生成一只乌龟</h2>
+<p>（1）使用rosservice list命令获取当前存在的服务列表，/spawn是生成乌龟的服务</p>
+<p>（2）使用rosservice info spawn可以看到该服务的一些细节信息</p>
+<p><img alt="" src="../imag/34service info.jpg" /></p>
+<p>可以看到①/turtlesim节点提供了该服务②URI③服务的消息类型（重要）④服务的参数（xy坐标位置，角度，名字）</p>
+<p>（3）调用rossrv info/show 消息类型名，查看该消息类型的具体信息格式</p>
+<p><img alt="" src="../imag/35srv消息细节.jpg" /></p>
+<p>（4）通过命令的方式调用服务并生成一只乌龟</p>
+<p>rosservice call 服务名字 tab键补齐会显示需要输入服务请求参数</p>
+<p>rosservice call /spawn</p>
+<p>（5）通过编码方式调用服务生成一只乌龟</p>
+<pre><code class="python">#! /usr/bin/env python
+import rospy
+from turtlesim.srv import Spawn,SpawnRequest,SpawnResponse
+&quot;&quot;&quot;
+需求：向服务器发送请求，生成一只小乌龟
+话题：spawn
+消息类型：/turtlesim/Spawn
+
+&quot;&quot;&quot;
+#编写主入口
+if __name__==&quot;__main__&quot;:
+    #初始化ros节点
+    rospy.init_node(&quot;generate_turtle&quot;)
+    #创建请求对象
+    client_gene = rospy.ServiceProxy(&quot;/spawn&quot;,Spawn)
+    #组织数据并发送请求
+    request = SpawnRequest()
+    request.x = 3.0
+    request.y = 9.0
+    request.theta = 0.9
+    request.name = &quot;littleturtle2&quot;
+    #判断服务端是否开启，未开启则挂起等待
+    client_gene.wait_for_service()
+    try:
+        reponse = client_gene.call(request)
+        #处理响应结果
+        rospy.loginfo(&quot;生成乌龟的名字叫：%s&quot;,reponse.name)
+    except:
+        rospy.logerr(&quot;请求失败！重复执行或其他异常&quot;)
+</code></pre>
+
+<h2 id="demo-04">demo 04 修改背景参数</h2>
+<p>（1）通过ros命令的方式修改</p>
+<p>rosparam list</p>
+<p>rosparam get</p>
+<p>rosparam set</p>
+<p>（2）通过编码方式实现</p>
+<pre><code class="python">#! /usr/bin/env python
+import rospy
+&quot;&quot;&quot;
+需求：修改乌龟gui背景色
+1、初始化ros节点
+2、设置参数
+&quot;&quot;&quot;
+if __name__==&quot;__main__&quot;:
+    rospy.init_node(&quot;set_param&quot;)
+    rospy.set_param(&quot;/turtlesim/background_r&quot;,10)
+    rospy.set_param(&quot;/turtlesim/backgroung_g&quot;,200)
+    rospy.set_param(&quot;/turtlesim/background_b&quot;,40)
+</code></pre>
+
+<h2 id="api">常用API介绍</h2>
+<p>1、rospy.init_node()</p>
+<p>2、rospy.Publisher()创建发布者对象</p>
+<p>3、spin（）回旋函数：进入循环，在循环中处理回调函数</p>
+<p>4、时间相关的API</p>
+<p>5、节点关闭相关的API</p>
+<h2 id="python">自定义python模块的导入</h2>
+<p>需要自己导入临时环境变量，指明新增文件的路径。</p>
+<h1 id="ros_6">七、ROS运行管理</h1>
+<p>ros是多进程的分布式框架</p>
+<h2 id="1_4">1、元功能包</h2>
+<p>​       将实现某一功能的具有内在逻辑联系的一些功能包打包在一起成为元功能包。元功能包可以方便用户的使用，安装时可以将其他打包的相关功能包一并下载。（注意元功能包的操作对象是不同的功能包）</p>
+<p>（1）新建功能包：自定义命名即可，由于元功能包是一个空包无需添加依赖</p>
+<p>（2）修改package.xml文件</p>
+<p>添加可执行依赖，如图所示可以在注释里复制一个</p>
+<p><img alt="" src="../imag/36元功能包.jpg" /></p>
+<p>将声明依赖的包换成准备打包在一起的各个功能包名并添加虚拟元包\<metapackage>可以将这些包关联起来</p>
+<p><img alt="" src="../imag/37添加依赖.png" /></p>
+<p>（3）修改CMakelist.txt文件</p>
+<p>保留红框中的三行，其余内容以及注释全部删掉</p>
+<p><img alt="" src="../imag/38CMakelist修改.png" /></p>
+<p>添加元功能包部分，（注意这几行之间不能有任何空行）</p>
+<p><img alt="" src="../imag/39.png" /></p>
+<p>编译即可完成</p>
+<h2 id="2launchros">2、launch文件（ros节点管理）</h2>
+<p>launch文件是xml格式，可以一次性启动多个功能节点。</p>
+<p>以键盘控制小乌龟运动为例的实现步骤：</p>
+<p>（1）在src文件中新建一个功能包，命名为launch01，并添加依赖turtlesim rospy roscpp std_msgs</p>
+<p>（2）在该功能包中新建一个文件，一般就命名为launch</p>
+<p>（3）在launch文件夹中新建一个以.launch为后缀名的文件，这里命名为startturtle.launch</p>
+<p>（4）编辑.launch文件的内容：根标签\<launch>，子级标签是需要一起启动的节点名</p>
+<p><img alt="" src="../imag/40launch.png" /></p>
+<p>（5）source刷新环境变量，使用命令：roslaunch 功能包名 .launch文件名 执行文件即可</p>
+<p>注意：roslaunch会主动判断是否启动roscore，未启动会自动启动roscore，所以无需手动启动</p>
+<h2 id="3launch">3、launch标签知识点总结归纳</h2>
+<p>（1）deprecated标签：输出过时警告，该launch文件不建议继续使用，可以找新版本的</p>
+<p>（2）node标签：用于指定ros节点，但由于节点启动是多进程的，执行时未必按照node标签的声明顺序进行启动</p>
+<p>（3）include标签：用于实现代码复用，将另一个xml格式的launch文件导入到当前文件</p>
+<pre><code class="python">&lt;include file=&quot;$(find 被复用文件所在功能包名)/launch/被复用文件名&quot;/&gt;
+</code></pre>
+
+<p>（4）remap标签：用于话题重命名，更改某节点订阅的话题名实现不同节点之间的灵活通信</p>
+<p>（5）param标签：为参数服务器设置参数，可以设置全局参数（launch里，node外），也可以设置节点内的参数（node标签里）</p>
+<p>（6）rosparam标签：主要是从yaml文件中导入参数</p>
+<p>（7）group标签：为ros节点分组，比如当想启动两套一样的节点时，为了防止重名问题，可以进行分组</p>
+<p>（8）arg标签：传参，封装参数值，公用一个变量时可以重复传参（宏定义）</p>
+<h2 id="4ros">4、ROS中的重名问题</h2>
+<h3 id="1_5">（1）工作空间覆盖（功能包重名）</h3>
+<p>在不同工作空间中存在重名的功能包时，后刷新的环境变量起作用。</p>
+<p>解决方式可以设置命名空间或者起别名（名称重映射）</p>
+<h3 id="2ros_1">（2）ROS节点名称重名</h3>
+<p>​       命名空间就是为名称添加前缀，名称重映射是为名称起别名。这两种策略都可以解决节点重名问题，两种策略的实现途径有多种:</p>
+<ul>
+<li>rosrun 命令</li>
+</ul>
+<p>①命名空间__ns:=xx 通过后面ns名称不同区分，从而可以启动多个节点</p>
+<p><code>rosrun turtlesim turtlesim_node  __ns:=mingcheng</code></p>
+<p>②名称重映射（起别名）</p>
+<p><code>rosrun turtlesim turtlesim_node __name:=dabao
+  rosrun turtlesim turtlesim_node __name:=xiaobao</code></p>
+<p>注意：两种方式可以同时组合使用</p>
+<ul>
+<li>launch 文件</li>
+</ul>
+<p><code>html
+  &lt;launch&gt;
+      &lt;node pkg="turtlesim" type="turtlesim_node" name ="turtlesim"/&gt;
+      &lt;!-- 名称重映射--&gt;
+      &lt;node pkg="turtlesim" type="turtlesim_node" name = "t1"/&gt;
+      &lt;!-- 命名空间方法 --&gt;
+      &lt;node pkg="turtlesim" type="turtlesim_node" name = "turtlesim" ns = "huahua"/&gt;
+      &lt;!-- 组合方法 --&gt;
+      &lt;node pkg="turtlesim" type="turtlesim_node" name = "t2" ns="baobao"/&gt;
+  &lt;/launch&gt;</code></p>
+<ul>
+<li>编码实现：API：anonymous=true时会给节点添加随机后缀，避免节点重名</li>
+</ul>
+<h3 id="3ros">（3）ROS话题名称重名问题</h3>
+<ul>
+<li>rosrun 命令</li>
+</ul>
+<p>案例：用键盘控制节点rosrun teleop_twist_keyboard teleop_twist_keyboard.py（默认使用节点名时cmd_vel）控制turtlesim_node的乌龟运动（默认使用turtle/cmd_vel节点）。</p>
+<p>方法：将其中一个节点名改成另一个，节点名称一致后才可以实现通信从而控制小乌龟运动</p>
+<pre><code>rosrun turtlesim turtlesim_node /turtle1/cmd_vel:=/cmd_vel
+</code></pre>
+
+<p>​       或</p>
+<pre><code>rosrun teleop_twist_keyboard teleop_twist_keyboard.py /cmd_vel:=/turtle1/cmd_vel
+</code></pre>
+
+<ul>
+<li>launch文件</li>
+</ul>
+<pre><code class="html">&lt;!-- 键盘控制乌龟运动 --&gt;
+&lt;launch&gt;
+    &lt;!-- 将乌龟的话题设置为与键盘控制一致 --&gt;
+    &lt;node pkg=&quot;turtlesim&quot; type=&quot;turtlesim_node&quot; name=&quot;turtlesim&quot;&gt;
+        &lt;remap from=&quot;/turtle1/cmd_vel&quot; to=&quot;/cmd_vel&quot;/&gt;
+    &lt;/node&gt;
+    &lt;node pkg=&quot;teleop_twist_keyboard&quot; type=&quot;teleop_twist_keyboard.py&quot; name=&quot;key&quot;/&gt;
+    &lt;!--将键盘控制话题设置为与乌龟一致，完全类比即可--&gt;
+&lt;/launch&gt;
+</code></pre>
+
+<h1 id="ros_7">八、ROS常用组件</h1>
+<h2 id="1tf">1、TF坐标变换</h2>
+<h3 id="1_6">（1）静态坐标变换</h3>
+<h4 id="_3">法一：编码实现</h4>
+<p>①创建功能包并添加依赖</p>
+<pre><code>catkin_create_pkg tf_static roscpp rospy std_msgs tf2 tf2_ros tf2_geometry_msgs geometry_msgs
+</code></pre>
+
+<p>②新建python文件，为文件添加可执行权限，修改CMakelists文件</p>
+<p>③编写发布方代码，编译执行</p>
+<pre><code class="python">#! /usr/bin/env python
+import rospy
+import tf2_ros
+from geometry_msgs.msg import TransformStamped
+import tf.transformations #欧拉角获取四元数
+&quot;&quot;&quot;
+发布方实现：用于发布两个坐标系的新相对关系（小车底盘——baselink和雷达——laser）
+流程：1、导包
+    2、初始化ROS节点
+    3、创建发布对象
+    4、组织被发布的数据
+    5、循环发布数据
+    6、spin（）
+&quot;&quot;&quot;
+if __name__==&quot;__main__&quot;:
+    rospy.init_node(&quot;tf_static_pub&quot;)
+    #创建发布对象
+    pub = tf2_ros.StaticTransformBroadcaster()
+    #组织被发布的数据
+    ts = TransformStamped()
+    #header
+    ts.header.stamp=rospy.Time.now()#设置时间戳
+    ts.header.frame_id = &quot;baselink&quot;#父级坐标系
+    #child fram
+    ts.child_frame_id = &quot;laser&quot;
+
+    #相对关系（偏移和四元数）
+    ts.transform.translation.x = 0.2
+    ts.transform.translation.y = 0.0
+    ts.transform.translation.z = 0.5
+    #四元数：一般先设置欧拉角，再转换成四元数
+    qtn = tf.transformations.quaternion_from_euler(0,0,0)#是一个列表对象，可以下标索引获取对应的值
+    #四元数获取
+    ts.transform.rotation.x =qtn[0]
+    ts.transform.rotation.y = qtn[1]
+    ts.transform.rotation.z = qtn[2]
+    ts.transform.rotation.w = qtn[3]
+
+    #发布数据
+    pub.sendTransform(ts)
+    rospy.spin()
+</code></pre>
+
+<p>④查看发布方发布的数据</p>
+<p>rostopic list，可以看到有话题名为tf_static的话题</p>
+<p><img alt="" src="../imag/41topiclist.png" /></p>
+<p>rostopic echo tf_static可以看到发布的具体信息</p>
+<p><img alt="" src="../imag/41tf_topicecho.jpg" /></p>
+<p>也可以借助可视化工具rviz直观看到两个坐标系</p>
+<p>（终端中输入rviz打开可视化窗口，左上角Fixed Frame选择baselink，左下角add，添加TF即可看到）</p>
+<p><img alt="" src="../imag/42tf_rviz.png" /></p>
+<p>④订阅方代码编写</p>
+<p>新建python文件tf_static_sub.py，为文件添加可执行权限，修改CMakelists文件</p>
+<pre><code class="python">#! /usr/bin/env python
+import rospy
+import tf2_ros
+from tf2_geometry_msgs import tf2_geometry_msgs
+&quot;&quot;&quot;
+订阅方实现：
+订阅坐标变换消息，传入被转换的坐标点，调用转换算法实现坐标转换
+1、导包（用到什么包导入什么包）
+2、初始化ros节点
+3、创建订阅对象
+4、组织被转换的坐标点
+5、转换逻辑编写（调用tf封装算法）
+6、输出转换结果B
+7、spin（）/spinonce（）
+&quot;&quot;&quot;
+if __name__==&quot;__main__&quot;:
+    #初始化ros节点
+    rospy.init_node(&quot;static_tf_pub&quot;)
+    #创建订阅对象
+    buffer = tf2_ros.Buffer() #创建缓存对象
+    sub = tf2_ros.TransformListener(buffer)#将缓存对象传入
+    #组织被转换的坐标点
+    ps = tf2_geometry_msgs.PointStamped()#可以用rosmsg info geometry_msgs.PointStamped 查看消息结构
+    ps.header.stamp = rospy.Time.now()
+    ps.header.frame_id = &quot;laser&quot;
+    ps.point.x = 2.0
+    ps.point.y = 3.0
+    ps.point.z = 5.0
+    #转换逻辑实现，由于雷达是不间断获取信息的，这里用循环发布数据来模拟
+    rate = rospy.Rate(10)
+    while not rospy.is_shutdown():
+        try:
+            #转换：buffer提供了对应的转换函数
+            ps_out = buffer.transform(ps,&quot;baselink&quot;)
+            rospy.loginfo(&quot;转换后的坐标结果:(%.2f,%.2f,%.2f)当前参考的坐标系：%s&quot;,ps_out.point.x,ps_out.point.y,ps_out.point.z,ps_out.header.frame_id) 
+        except:
+            rospy.logwarn(&quot;错误提示：%s&quot;,Exception)
+        rate.sleep()
+</code></pre>
+
+<h4 id="ros_8">法二：ros封装命令实现静态坐标转换</h4>
+<pre><code>rosrun tf2_ros static_transform_publisher x偏移量 y偏移量 z偏移量 x轴偏转角 y轴偏转角 z轴偏转角 父坐标系名 子坐标系名
+</code></pre>
+
+<h3 id="2_3">（2）动态坐标变换</h3>
+<p>案例：实现小乌龟运动时，实时显示乌龟位姿与原点的相对关系，并能够在rviz中实时观察到两坐标的相对位置</p>
+<p>实现思路：发布方订阅乌龟运动的位姿信息，建立乌龟（子级坐标系）与原点（父级坐标系）并发布相对关系，订阅方订阅到两坐标系并输出乌龟相对原点的动态变换坐标。</p>
+<p>注意：这里的发布方订阅了内置节点乌龟运动的信息，其实是个嵌套实现</p>
+<p>①发布方编码实现</p>
+<pre><code class="python">#! /usr/bin/env python
+import rospy
+from turtlesim.msg import Pose
+import tf2_ros
+from geometry_msgs.msg import TransformStamped
+import tf.transformations
+&quot;&quot;&quot;
+发布方实现：
+订阅乌龟的位姿信息，转换成坐标系的相对关系并发布
+准备：了解乌龟位姿的话题和消息类型：话题是turtle1/pose，类型turtlesim/Pose
+流程：
+1、导包
+2、初始化ros节点
+3、创建订阅对象
+4、回调函数处理订阅到的消息（核心）
+5、spin（）
+&quot;&quot;&quot;
+def doPose(pose):
+    #创建发布坐标系相对关系的对象
+    pub = tf2_ros.TransformBroadcaster()
+    #将Pose转换成坐标系相对关系的消息
+    ts = TransformStamped()
+    ts.header.frame_id = &quot;world&quot;
+    ts.header.stamp = rospy.Time.now()
+    ts.child_frame_id = &quot;turtle1&quot;
+    #transform,坐标系子级坐标系相对于父级坐标系的偏移量
+    ts.transform.translation.x = pose.x
+    ts.transform.translation.y = pose.y
+    ts.transform.translation.z = 0
+    #ts下的rotation，通过四元数设置方向上的偏转角（一般需要一个欧拉角的转换过程）
+    &quot;&quot;&quot;
+    乌龟是2D对象，不存在x向的翻滚，y向的俯仰，只有z向上的转向（偏航）
+    欧拉角（0，0 ，pose.theta）
+    &quot;&quot;&quot;
+    qtn = tf.transformations.quaternion_from_euler(0,0,pose.theta)
+    ts.transform.rotation.x = qtn[0]
+    ts.transform.rotation.y = qtn[1]
+    ts.transform.rotation.z = qtn[2]
+    ts.transform.rotation.w = qtn[3]
+    #发布
+    pub.sendTransform(ts)   
+
+if __name__==&quot;__main__&quot;:
+    rospy.init_node(&quot;dynamic_pub&quot;)
+    #创建订阅对象
+    sub = rospy.Subscriber(&quot;/turtle1/pose&quot;,Pose,doPose,queue_size = 100)
+    rospy.spin()
+</code></pre>
+
+<p>②订阅方编码实现</p>
+<p>这里要格外注意时间戳要置0，采用rospy.Time()，如果仍然采用rospy.Time.now获取当前，坐标转换会因为时间戳相差较大而无法完成转换从而抛出异常。</p>
+<pre><code class="python">#! /usr/bin/env python
+import rospy
+import tf2_ros
+from tf2_geometry_msgs import tf2_geometry_msgs
+&quot;&quot;&quot;
+订阅方实现：
+订阅坐标变换消息，传入被转换的坐标点，调用转换算法实现坐标转换
+1、导包（用到什么包导入什么包）
+2、初始化ros节点
+3、创建订阅对象
+4、组织被转换的坐标点
+5、转换逻辑编写（调用tf封装算法）
+6、输出转换结果B
+7、spin（）/spinonce（）
+&quot;&quot;&quot;
+
+if __name__==&quot;__main__&quot;:
+
+    #初始化ros节点
+    rospy.init_node(&quot;static_tf_pub&quot;)
+    #创建订阅对象
+    buffer = tf2_ros.Buffer() #创建缓存对象
+    sub = tf2_ros.TransformListener(buffer)#将缓存对象传入
+    #组织被转换的坐标点
+    ps = tf2_geometry_msgs.PointStamped()
+    #时间戳 0 
+    ps.header.stamp = rospy.Time()
+    ps.header.frame_id = &quot;turtle1&quot;
+    rate = rospy.Rate(10)
+    while not rospy.is_shutdown():
+        try:
+            #转换：buffer提供了对应的转换函数
+            ps_out = buffer.transform(ps,&quot;world&quot;)
+            rospy.loginfo(&quot;转换后的坐标结果:(%.2f,%.2f,%.2f)当前参考的坐标系：%s&quot;,ps_out.point.x,ps_out.point.y,ps_out.point.z,ps_out.header.frame_id) 
+        except:
+            rospy.logwarn(&quot;错误提示：%s&quot;,Exception)
+        rate.sleep()
+</code></pre>
+
+<p>③运行</p>
+<p>启动roscore，启动乌龟GUI节点和键盘控制节点，分别rosrun发布方和订阅方，打开rviz，可以看到键盘控制乌龟运动时，会实时输出乌龟相对原点坐标的位置信息和坐标的动态变化图</p>
+<p><img alt="" src="../imag/43tf_dynamic.jpg" /></p>
+<h3 id="3_5">（3）多坐标变换</h3>
+<p>①按照静态坐标变换的法二发布两个静态相对坐标关系：son1与world和son2与world，并用launch文件封装起来</p>
+<pre><code class="html">&lt;launch&gt;
+    &lt;!-- 发布son1相对于world以及son2相对于world的坐标关系 --&gt;
+    &lt;node pkg=&quot;tf2_ros&quot; type=&quot;static_transform_publisher&quot; name=&quot;son1&quot; args=&quot;5 0 0 0 0 0 /world /son1&quot; output=&quot;screen&quot;/&gt;
+    &lt;node pkg=&quot;tf2_ros&quot; type=&quot;static_transform_publisher&quot; name=&quot;son2&quot; args=&quot;3 0 0 0 0 0 /world /son2&quot; output=&quot;screen&quot;/&gt;
+&lt;/launch&gt;
+</code></pre>
+
+<p>②类比动态坐标变换编写代码</p>
+<pre><code class="python">#! /usr/bin/env python
+import rospy
+import tf2_ros
+from tf2_geometry_msgs import tf2_geometry_msgs
+from geometry_msgs.msg import TransformStamped
+
+if __name__==&quot;__main__&quot;:
+
+    #初始化ros节点
+    rospy.init_node(&quot;static_tf_pub&quot;)
+    #创建订阅对象
+    buffer = tf2_ros.Buffer() #创建缓存对象
+    sub = tf2_ros.TransformListener(buffer)#将缓存对象传入
+    #组织被转换的坐标点
+    ps = tf2_geometry_msgs.PointStamped()
+    #时间戳 0 
+    ps.header.stamp = rospy.Time.now()
+    ps.header.frame_id = &quot;son1&quot;
+    ps.point.x = 1.0
+    ps.point.y = 2.0
+    ps.point.z = 3.0
+    #转换逻辑实现
+    rate = rospy.Rate(10)
+    while not rospy.is_shutdown():
+        try:
+            #计算son1相对于son2的转换关系
+            ts = buffer.lookup_transform(&quot;son2&quot;,&quot;son1&quot;,rospy.Time(0))
+            rospy.loginfo(&quot;父级坐标系：%s，
+                          子级坐标系：%s&quot;,
+                          ts.header.frame_id,
+                          ts.child_frame_id)
+            #转换：buffer提供了对应的转换函数
+            ps_out = buffer.transform(ps,&quot;son2&quot;)
+            rospy.loginfo(&quot;转换后的坐标结果:(%.2f,%.2f,%.2f)当前参考的坐标系：%s&quot;,ps_out.point.x,ps_out.point.y,ps_out.point.z,ps_out.header.frame_id) 
+        except:
+            rospy.logwarn(&quot;错误提示：%s&quot;,Exception)
+        rate.sleep()
+</code></pre>
+
+<p>（4）坐标关系查看工具tf2_tools</p>
+<p>首先调用rospack find tf2_tools查看是否包含该功能包，如果没有，请使用如下命令安装:</p>
+<pre><code>sudo apt install ros-noetic-tf2-tools
+</code></pre>
+
+<p>注意使用该工具的前提是，已经启动了坐标相对关系变换的节点</p>
+<p>使用命令查看坐标相对关系</p>
+<pre><code>rosrun tf2_tools view_frames.py
+</code></pre>
+
+<p>接下来会自动解析当前启动的坐标并输出一个pdf文件，显示坐标间的相对关系，可以在执行这条命令的路径下找到该pdf文件并打开</p>
+<p><img alt="" src="../imag/44tf2_tools.jpg" /></p>
+<p><img alt="" src="../imag/45tf2_pdf.png" /></p>
+<h2 id="2rosbag">2、rosbag节点录制与回放</h2>
+<p>在ROS中提供数据得留存和读取实现，主要功能是录制与回放，可以实现数据复用，便于调试和测试</p>
+<p>1.准备</p>
+<p>创建目录保存录制的文件</p>
+<pre><code>mkdir ./xxx
+cd xxx
+</code></pre>
+
+<p>2.开始录制</p>
+<pre><code>rosbag record -a -O 目标文件（写清楚路径）
+</code></pre>
+
+<p>操作小乌龟一段时间，结束录制使用 ctrl + c，在创建的目录中会生成bag文件。</p>
+<p>3.查看文件</p>
+<pre><code>rosbag info 文件名（写清楚路径）
+</code></pre>
+
+<p>4.回放文件</p>
+<pre><code>rosbag play 文件名
+</code></pre>
+
+<p>重启乌龟节点，会发现，乌龟按照录制时的轨迹运动</p>
+<h2 id="3rqt">3、rqt工具箱</h2>
+<p>​        rqt工具箱是机器人开发中的一系列可视化工具，在调用工具时以图形化操作代替了命令操作，实现ros可视化调试，为ros开发提供了便利。</p>
+<h3 id="1rqt">（1）rqt话题发布</h3>
+<p>使用rqt工具箱调用话题发布从而控制小乌龟运动的步骤示意图</p>
+<p>rqt启动，plugins选择topic，下拉选择合适的节点，+号添加到空白处，下拉设置参数，message publisher发布</p>
+<p><img alt="" src="../imag/46rqt.jpg" /></p>
+<h3 id="2rqt-graph">（2）rqt-graph</h3>
+<p>可以直接在工具箱里调用</p>
+<p><img alt="" src="../imag/47rqt-graph.png" /></p>
+<h3 id="3rqt-console">（3）rqt-console</h3>
+<p>ros中用于显示和过滤日志的图形化插件</p>
+<h3 id="4rqt-plot">（4）rqt-plot</h3>
+<p>以2D绘图的方式绘制数据</p>
+<p><img alt="" src="../imag/48rqt-plot.png" /></p>
+<h3 id="5rqt-bag">（5）rqt-bag</h3>
+<p>录制和重放bag文件的图形化插件</p>
+<p>rqt-bag启动或者在plugins选择，点击左上角红色圆圈开始选择需要录制的节点，并点击record添加bag文件存放的路径即可开始录制</p>
+<p><img alt="" src="../imag/49rqt-bag.jpg" /></p>
+<p>需要回放时点击圆圈旁边的文件夹按钮，选择想要回放的bag文件，回放时要注意需要右键点击进度条，勾选publisher乌龟才会运动。</p>
+<h1 id="_4">九、机器人系统仿真</h1>
+<h2 id="1urdfrviz">1、URDF集成rviz基本流程</h2>
+<p>（1）创建功能包，并添加依赖，与机器人模型相关的依赖主要有urdf 和xacro</p>
+<p>（2）在功能包下新建一些文件夹</p>
+<p>launch：用于存放launch启动文件</p>
+<p>urdf：存放机器人描述文件（urdf文件）</p>
+<p>meshes：用于给机器人贴皮肤</p>
+<p>config：存放配置文件</p>
+<p>（3）编写urdf文件，生成一个方形的机器人模型</p>
+<pre><code class="html">&lt;robot name=&quot;mycar&quot;&gt;
+    &lt;link name=&quot;base_link&quot;&gt;
+        &lt;visual&gt;
+            &lt;geometry&gt;
+                &lt;box size=&quot;0.5 0.2 0.1&quot; /&gt;
+            &lt;/geometry&gt;
+        &lt;/visual&gt;
+    &lt;/link&gt;
+&lt;/robot&gt;
+</code></pre>
+
+<p>（4）创建launch启动文件</p>
+<pre><code class="html">&lt;launch&gt;
+    &lt;!-- 1、在参数服务器载入urdf文件--&gt;
+    &lt;param name=&quot;robot_description&quot; textfile=&quot;
+    $(find urdf_rviz)/urdf/urdf/helloworld.urdf&quot;/&gt;
+    &lt;!-- 2、启动rviz--&gt;
+    &lt;node pkg=&quot;rviz&quot; type=&quot;rviz&quot; name=&quot;rviz&quot;/&gt;
+&lt;/launch&gt;
+</code></pre>
+
+<p>(5)配置rviz显示机器人模型，注意Fixed Frame要选择urdf里设置的名称link name，也可以添加TF坐标轴直观显示。</p>
+<p><img alt="" src="../imag/50rvizrobot.jpg" /></p>
+<p>（6）保存配置</p>
+<p>由于不保存配置时会导致当下次再次打开launch文件打开rviz时，仍然需要重新配置</p>
+<p>左上角File，save config as，存放到文件夹config中即可</p>
+<p><img alt="" src="../imag/51save.png" /></p>
+<p>在launch文件中需要导入配置好的rviz文件</p>
+<p><img alt="" src="../imag/51rivz导入.jpg" /></p>
+<p>重新启动时就无需再重复配置了</p>
+<h2 id="2urdf">2、URDF文件编写语法</h2>
+<p>urdf文件是标准xml文件，预定义了一些列标签用于描述机器人模型，主要分为两类连杆（link）与关节（joint）</p>
+<ul>
+<li>连杆：机器人的可见部分，即刚体部分</li>
+<li>关节：连杆之间饿关系连接（关节），但是关节这部分在直观上是不可见的</li>
+<li>robot：类似跟标签的存在</li>
+<li>gazebo：gazebo仿真时使用的标签，用于配置机器人的所需参数，如机器人的材料属性，gazebo插件等，但这类标签并不必须，只有在需要仿真时设置。</li>
+</ul>
+<h3 id="1robot">（1）robot标签</h3>
+<p>​      urdf为了保证xml文件语法完整性，使用robot标签作为跟标签，所有的 link 和 joint 以及其他标签都必须包含在 robot 标签内,在该标签内可以通过 name 属性设置机器人模型的名称。</p>
+<h3 id="2link">（2）link标签</h3>
+<p>描述机器人某部件的外观和刚体属性，比如: 机器人底座、轮子、激光雷达、摄像头...每一个部件都对应一个 link, 在 link 标签内，可以设计该部件的形状、尺寸、颜色、惯性矩阵、碰撞参数等一系列属性</p>
+<p>编写urdf文件时，关键在于要理清层级关系</p>
+<p>1.属性
+name ---&gt; 为连杆命名
+2.子标签
+visual ---&gt; 描述外观(对应的数据是可视的)</p>
+<ul>
+<li>geometry 设置连杆的几何形状</li>
+</ul>
+<p>​       标签1: box(盒状)</p>
+<p>​               属性:size=长(x) 宽(y) 高(z)
+​       标签2: cylinder(圆柱)</p>
+<p>​               属性:radius=半径 length=高度
+​       标签3: sphere(球体)</p>
+<p>​               属性:radius=半径
+​       标签4: mesh(为连杆添加皮肤)</p>
+<p>​               属性: filename=资源路径(格式:\package://<packagename>/<path>/文件)</p>
+<p>示例如下：</p>
+<pre><code class="html">&lt;!-- 设置不同形状的机器人部件 --&gt;
+&lt;robot name=&quot;mycar&quot;&gt;
+    &lt;link name=&quot;base_link&quot;&gt;
+        &lt;!-- 可视化标签 --&gt;
+        &lt;visual&gt;
+            &lt;!-- 形状 --&gt;
+            &lt;geometry&gt;
+                &lt;!-- 立方体 --&gt;
+                &lt;!-- &lt;box size=&quot;0.3 0.2 0.1&quot;/&gt; --&gt;
+                &lt;!-- 圆柱体--&gt;
+                &lt;!-- &lt;cylinder radius=&quot;0.2&quot; length=&quot;1&quot;/&gt; --&gt;
+                &lt;!--  球体--&gt;
+                &lt;!-- &lt;sphere radius=&quot;1&quot;/&gt; --&gt;
+                &lt;!-- 添加皮肤 --&gt;
+                &lt;mesh filename=&quot;package://urdf_rviz/meshes/autolabor_mini.stl&quot;/&gt;
+            &lt;/geometry&gt;
+        &lt;/visual&gt;
+    &lt;/link&gt;
+&lt;/robot&gt;
+</code></pre>
+
+<ul>
+<li>​ origin 设置偏移量与倾斜弧度</li>
+</ul>
+<p>​           属性1: xyz=x偏移 y便宜 z偏移</p>
+<p>​           属性2: rpy=x翻滚 y俯仰 z偏航 (单位是弧度)</p>
+<p>示例如下：</p>
+<pre><code class="html">  &lt;!-- 偏移量与倾斜弧度 --&gt;
+            &lt;!-- xyz:设置分别在xyz上的偏移量
+            rpy用于设置xyz三个方向的旋转角 --&gt;
+            &lt;origin xyz='0 0 0' rpy='1.57 0 0'/&gt;
+</code></pre>
+
+<ul>
+<li>​ metrial 设置材料属性(颜色)</li>
+</ul>
+<p>​           属性: name</p>
+<p>​           标签: color</p>
+<p>​           属性: rgba=红绿蓝权重值与透明度 (每个权重值以及透明度取值[0,1])</p>
+<p>示例如下：</p>
+<pre><code class="html"> &lt;!-- 颜色 --&gt;
+            &lt;!-- rgba:
+            rgb三原色,a透明度,四个值取值都在0到1之间 --&gt;
+            &lt;material name=&quot;car_color&quot;&gt;
+                &lt;color rgba = &quot;0.7 0.34 0.8 0.5&quot;/&gt;
+            &lt;/material&gt;
+</code></pre>
+
+<p>collision ---&gt; 连杆的碰撞属性</p>
+<p>Inertial ---&gt; 连杆的惯性矩阵</p>
+<h3 id="3joint">（3）joint标签</h3>
+<p>​      urdf 中的 joint 标签用于描述机器人关节的运动学和动力学属性，还可以指定关节运动的安全极限，机器人的两个部件(分别称之为 parent link 与 child link)以"关节"的形式相连接，不同的关节有不同的运动形式: 旋转、滑动、固定、旋转速度、旋转角度限制....,比如:安装在底座上的轮子可以360度旋转，而摄像头则可能是完全固定在底座上。joint标签对应的数据在模型中是不可见的。</p>
+<ol>
+<li>
+<p><strong>属性</strong></p>
+</li>
+<li>
+<p>name ---&gt; 为关节命名</p>
+</li>
+<li>type ---&gt; 关节运动形式</li>
+<li>continuous: 旋转关节，可以绕单轴无限旋转</li>
+<li>revolute: 旋转关节，类似于 continues,但是有旋转角度限制</li>
+<li>prismatic: 滑动关节，沿某一轴线移动的关节，有位置极限</li>
+<li>planer: 平面关节，允许在平面正交方向上平移或旋转</li>
+<li>floating: 浮动关节，允许进行平移、旋转运动</li>
+<li>
+<p>fixed: 固定关节，不允许运动的特殊关节</p>
+</li>
+<li>
+<p><strong>子级标签</strong></p>
+</li>
+<li>
+<p>parent(必需的)</p>
+</li>
+</ol>
+<p>parent link的名字是一个强制的属性：</p>
+<ul>
+<li>
+<p>link:父级连杆的名字，是这个link在机器人结构树中的名字。</p>
+</li>
+<li>
+<p>child(必需的)</p>
+</li>
+</ul>
+<p>child link的名字是一个强制的属性：</p>
+<ul>
+<li>
+<p>link:子级连杆的名字，是这个link在机器人结构树中的名字。</p>
+</li>
+<li>
+<p>origin</p>
+</li>
+<li>
+<p>属性: xyz=各轴线上的偏移量 rpy=各轴线上的偏移弧度。</p>
+</li>
+<li>
+<p>axis</p>
+</li>
+<li>
+<p>属性: xyz用于设置围绕哪个关节轴运动。</p>
+</li>
+</ul>
+<pre><code class="html">&lt;!-- 需求:设置机器人底盘,并添加摄像头 --&gt;
+&lt;robot name=&quot;mycar&quot;&gt;
+    &lt;!-- 1 底盘link --&gt;
+    &lt;link name=&quot;base_link&quot;&gt;
+        &lt;!-- 可视化标签 --&gt;
+        &lt;visual&gt;
+            &lt;!-- 形状 --&gt;
+            &lt;geometry&gt;
+                &lt;!-- 立方体 --&gt;
+                &lt;box size=&quot;0.3 0.2 0.1&quot;/&gt;
+            &lt;/geometry&gt;
+            &lt;!-- 偏移量与倾斜弧度 --&gt;
+            &lt;!-- xyz:设置分别在xyz上的偏移量
+            rpy用于设置xyz三个方向的旋转角 --&gt;
+            &lt;origin xyz='0 0 0' rpy='0 0 0'/&gt;
+
+            &lt;!-- 颜色 --&gt;
+            &lt;!-- rgba:
+            rgb三原色,a透明度,四个值取值都在0到1之间 --&gt;
+            &lt;material name=&quot;car_color&quot;&gt;
+                &lt;color rgba = &quot;0.3 0.4 0.8 0.8&quot;/&gt;
+            &lt;/material&gt;
+        &lt;/visual&gt;
+    &lt;/link&gt;
+
+    &lt;!-- 2 摄像头link --&gt;
+    &lt;link name=&quot;camera&quot;&gt;
+        &lt;!-- 可视化标签 --&gt;
+        &lt;visual&gt;
+            &lt;!-- 形状 --&gt;
+            &lt;geometry&gt;
+                &lt;!-- 立方体 --&gt;
+                &lt;box size=&quot;0.03 0.05 0.05&quot;/&gt;
+            &lt;/geometry&gt;
+            &lt;!-- 偏移量与倾斜弧度 --&gt;
+            &lt;!-- xyz:设置分别在xyz上的偏移量
+            rpy用于设置xyz三个方向的旋转角 --&gt;
+            &lt;origin xyz='0 0 0.025' rpy='0 0 0'/&gt;
+            &lt;!-- 需要上移半个摄像头的高度,才不会导致摄像头内嵌在机器人车体里 --&gt;
+            &lt;!-- 颜色 --&gt;
+            &lt;!-- rgba:
+            rgb三原色,a透明度,四个值取值都在0到1之间 --&gt;
+            &lt;material name=&quot;car_color&quot;&gt;
+                &lt;color rgba = &quot;0 1 0 0.8&quot;/&gt;
+            &lt;/material&gt;
+        &lt;/visual&gt;
+    &lt;/link&gt;
+    &lt;!-- 3 关节 --&gt;
+    &lt;joint name=&quot;camera_to_link&quot; type=&quot;continuous&quot;&gt;
+        &lt;!-- 父级link --&gt;
+        &lt;parent link=&quot;base_link&quot;/&gt;
+        &lt;!-- 子级link --&gt;
+        &lt;child link=&quot;camera&quot;/&gt;
+        &lt;!-- 设置偏移量 --&gt;
+        &lt;origin xyz='0.13 0 0.05' rpy='0 0 0'/&gt;
+        &lt;!-- 设置关节旋转参考的坐标轴 --&gt;
+        &lt;axis xyz='0 0 1'/&gt;
+    &lt;/joint&gt;
+&lt;/robot&gt;
+</code></pre>
+
+<p>launch文件编写：</p>
+<pre><code class="html">&lt;launch&gt;
+    &lt;!-- 1、在参数服务器载入urdf文件 --&gt;
+    &lt;param name=&quot;robot_description&quot; textfile=&quot;$(find urdf_rviz)/urdf/urdf/joint.urdf&quot;/&gt;
+    &lt;!-- 2、启动rviz --&gt;
+    &lt;node pkg=&quot;rviz&quot; type=&quot;rviz&quot; name=&quot;rviz&quot; args=&quot;-d $(find urdf_rviz)/config/showmycar.rviz&quot;/&gt;
+    &lt;!-- 注意:只有上述两条语句时会抛出异常:显示位置与颜色异常,给出提示 no transform from camera to baselink(缺少坐标变换) --&gt;
+    &lt;!-- 原因:rviz中显示urdf时.必须发布不同部件之间的坐标系关系 --&gt;
+    &lt;!-- 解决:ROS中提供的关于机器人模型显示的坐标发布相关节点(joint_state_publisher 和 robot_state_publisher) --&gt;
+    &lt;!-- 关节状态发布节点 --&gt;
+    &lt;node pkg=&quot;joint_state_publisher&quot; type=&quot;joint_state_publisher&quot; name=&quot;joint_state_publisher&quot;/&gt;
+    &lt;!-- 机器人状态发布节点 --&gt;
+    &lt;node pkg=&quot;robot_state_publisher&quot; type=&quot;robot_state_publisher&quot; 
+name=&quot;robot_state_publisher&quot;/&gt;
+    &lt;!--添加控制机器人关节运动的节点--&gt;
+    &lt;node pkg=&quot;joint_state_publisher_gui&quot; type=&quot;joint_state_publisher_gui&quot;
+name=&quot;joint_state_publisher_gui&quot;/&gt;
+&lt;/launch&gt;
+</code></pre>
+
+<p>注意：关节控制节点不是必须的，它的作用在于提供一个控制关节节点运动的UI界面，便于调试urdf文件是否正常。</p>
+<h3 id="4urdf">（4）URDF工具</h3>
+<p>在 ROS 中，提供了一些工具来方便 URDF 文件的编写，比如:</p>
+<ul>
+<li>
+<p>check_urdf命令可以检查复杂的 urdf 文件是否存在语法问题</p>
+</li>
+<li>
+<p>urdf_to_graphiz命令可以查看 urdf 模型结构，显示不同 link 的层级关系</p>
+</li>
+</ul>
+<p>使用工具之前，首先需要安装，安装命令:sudo apt install liburdfdom-tools</p>
+<h2 id="3rvizarbotix">3、在RVIZ中控制机器人运动（Arbotix）</h2>
+<p>（1）安装arbotix</p>
+<pre><code>sudo apt-get ros-neotic-arbotix
+</code></pre>
+
+<h2 id="4urdfgazebo">4、URDF集成Gazebo的基本流程</h2>
+<p>（1）创建功能包</p>
+<p>功能包：urdf_gazebo</p>
+<p>依赖：urdf xacro gazebo_ros gazebo_ros_control gazebo_plugins</p>
+<p>（2）文件夹准备</p>
+<p>新建文件夹：urdf——新建文件</p>
+<p>urdf文件写好之后，可以用check_urdf工具检查是否有语法错误，人工检查难以发现，可能会导致后续gazebo环境中无法正确显示。</p>
+<p>检查命令：在终端进入urdf文件所在文件夹</p>
+<pre><code>check_urdf xxx.urdf(urdf文件名)
+</code></pre>
+
+<p>urdf代码示例：</p>
+<pre><code class="xml">&lt;robot name=&quot;myrobot&quot;&gt;
+    &lt;link name=&quot;base_link&quot;&gt;
+        &lt;!-- 可视化部分 --&gt;
+        &lt;visual&gt;
+            &lt;geometry&gt;
+                &lt;box size=&quot;0.5 0.3 0.1&quot;/&gt;
+            &lt;/geometry&gt;
+            &lt;origin xyz=&quot;0 0 0&quot; rpy=&quot;0 0 0&quot;/&gt;
+            &lt;!-- 由于仿真中刚体不会透明,于是颜色在gazebo中不再生效,gazebo有特定的颜色设置 --&gt;
+            &lt;material name=&quot;yellow&quot;&gt;
+                &lt;color rgba=&quot;0.5 0.5 0 0.8&quot;/&gt;
+            &lt;/material&gt;
+        &lt;/visual&gt;
+        &lt;!-- gezebo与rviz不同的部分:collision碰撞属性和inertial惯性矩阵 --&gt;
+        &lt;!-- 1.碰撞参数collision:如果是标准几何体,直接复制isual中的geometry和origin即可 --&gt;
+        &lt;collision&gt;
+            &lt;geometry&gt;
+                &lt;box size=&quot;0.5 0.3 0.1&quot;/&gt;
+            &lt;/geometry&gt;
+            &lt;origin xyz=&quot;0 0 0&quot; rpy=&quot;0 0 0&quot;/&gt;
+        &lt;/collision&gt;
+        &lt;!-- 2.惯性矩阵inertial:需要公式计算,与重心和质量有关 --&gt;
+        &lt;inertial&gt;
+            &lt;!-- 设置重心偏移:质量密度均匀时就是000 --&gt;
+            &lt;origin xyz=&quot;0 0 0&quot;/&gt;
+            &lt;!-- 标签mass设置质量 --&gt;
+            &lt;mass value=&quot;2&quot;/&gt;
+            &lt;!-- 不同维度上的惯性参数:需要通过公式计算,否则仿真可能会出问题 --&gt;
+            &lt;inertia ixx=&quot;1&quot; ixy=&quot;0&quot; ixz=&quot;0&quot; iyy=&quot;1&quot; iyz=&quot;0&quot; izz=&quot;1&quot;/&gt;
+        &lt;/inertial&gt;  
+    &lt;/link&gt;
+    &lt;!-- gazebo颜色设置(注意位置,设置在连杆标签外的) --&gt;
+    &lt;gazebo reference=&quot;base_link&quot;&gt;
+        &lt;material&gt;Gazebo/Red&lt;/material&gt;
+    &lt;/gazebo&gt;
+&lt;/robot&gt;
+</code></pre>
+
+<p>将urdf文件和gazebo启动集成到launch文件中</p>
+<pre><code class="xml">&lt;launch&gt;
+    &lt;!-- 在参数服务器中载入urdf --&gt;
+    &lt;param name=&quot;robot_description&quot; textfile=&quot;$(find urdf_gazebo)/urdf/helloworld.urdf&quot;/&gt;
+    &lt;!-- 启动gazebo仿真环境 --&gt;
+    &lt;include file=&quot;$(find gazebo_ros)/launch/empty_world.launch&quot;/&gt;
+    &lt;!-- 在gazebo中添加机器人模型 --&gt;    
+    &lt;node pkg=&quot;gazebo_ros&quot; type=&quot;spawn_model&quot; name=&quot;spawn_model&quot; args=&quot;-urdf -model car -param robot_description&quot;/&gt;
+    &lt;!-- car是名字，可以自己取，别的不可以--&gt;
+&lt;/launch&gt;
+</code></pre>
+
+<h2 id="5gazebo">5、Gazebo导入自定义环境</h2>
+<p>​    之前的案例gazebo中导入的是一个空世界empty_world，这里会介绍如何导入房屋数目等自定义的环境</p>
+<p>（1）启动 gazebo 打开构建面板，绘制仿真环境</p>
+<p><img alt="" src="../imag/53gazebo环境.jpg" /></p>
+<p><img alt="" src="../imag/54gazebo.jpg" /></p>
+<p>（2）保存构建的环境</p>
+<p>点击: 左上角 file ---&gt; Save (保存路径功能包下的: models)</p>
+<p>然后 file ---&gt; Exit Building Editor</p>
+<p>（3） 保存为 world 文件
+可以用页面上方gazebo自带的工具箱再添加一些插件，然后保存为 world 文件(保存路径功能包下的: worlds)，注意这里的文件夹命名必须是worlds</p>
+<p><img alt="" src="../imag/55gazebo保存.jpg" /></p>
+<p>（4）启动自定义环境</p>
+<pre><code class="xml">&lt;launch&gt;
+
+    &lt;!-- 将 Urdf 文件的内容加载到参数服务器 --&gt;
+    &lt;param name=&quot;robot_description&quot; command=&quot;$(find xacro)/xacro $(find demo02_urdf_gazebo)/urdf/xacro/my_base_camera_laser.urdf.xacro&quot; /&gt;
+    &lt;!-- 启动 gazebo --&gt;
+    &lt;include file=&quot;$(find gazebo_ros)/launch/empty_world.launch&quot;&gt;
+        &lt;arg name=&quot;world_name&quot; value=&quot;$(find demo02_urdf_gazebo)/worlds/hello.world&quot; /&gt;
+    &lt;/include&gt;
+
+    &lt;!-- 在 gazebo 中显示机器人模型 --&gt;
+    &lt;node pkg=&quot;gazebo_ros&quot; type=&quot;spawn_model&quot; name=&quot;model&quot; args=&quot;-urdf -model mycar -param robot_description&quot;  /&gt;
+&lt;/launch&gt;
+</code></pre>
+
+<p>​           通过roslaunch启动相关的env.launch文件，这里的关键部分是在launch文件中用include标签集成启动gazebo部分，由原来的空世界（empty_world）变成了自定义的world文件worlds/hello.world</p>
+<h2 id="6ros-control">6、机器人运动控制ROS-control</h2>
+<p>​       需要编写一个单独的xacro文件，为机器人模型添加传动装置以及控制器，这里主要需要修改的是joint_name，需要和urdf/xacro编写时给驱动轮的名字相同。</p>
+<pre><code class="xml">&lt;robot name=&quot;my_car_move&quot; xmlns:xacro=&quot;http://wiki.ros.org/xacro&quot;&gt;
+
+    &lt;!-- 传动实现:用于连接控制器与关节 --&gt;
+    &lt;xacro:macro name=&quot;joint_trans&quot; params=&quot;joint_name&quot;&gt;
+        &lt;!-- Transmission is important to link the joints and the controller --&gt;
+        &lt;transmission name=&quot;${joint_name}_trans&quot;&gt;
+            &lt;type&gt;transmission_interface/SimpleTransmission&lt;/type&gt;
+            &lt;joint name=&quot;${joint_name}&quot;&gt;
+                &lt;hardwareInterface&gt;hardware_interface/VelocityJointInterface&lt;/hardwareInterface&gt;
+            &lt;/joint&gt;
+            &lt;actuator name=&quot;${joint_name}_motor&quot;&gt;
+                &lt;hardwareInterface&gt;hardware_interface/VelocityJointInterface&lt;/hardwareInterface&gt;
+                &lt;mechanicalReduction&gt;1&lt;/mechanicalReduction&gt;
+            &lt;/actuator&gt;
+        &lt;/transmission&gt;
+    &lt;/xacro:macro&gt;
+
+    &lt;!-- 每一个驱动轮都需要配置传动装置 --&gt;
+    &lt;xacro:joint_trans joint_name=&quot;left_wheel2base_link&quot; /&gt;
+    &lt;xacro:joint_trans joint_name=&quot;right_wheel2base_link&quot; /&gt;
+
+    &lt;!-- 控制器 --&gt;
+    &lt;gazebo&gt;
+        &lt;plugin name=&quot;differential_drive_controller&quot; filename=&quot;libgazebo_ros_diff_drive.so&quot;&gt;
+            &lt;rosDebugLevel&gt;Debug&lt;/rosDebugLevel&gt;
+            &lt;publishWheelTF&gt;true&lt;/publishWheelTF&gt;
+            &lt;robotNamespace&gt;/&lt;/robotNamespace&gt;
+            &lt;publishTf&gt;1&lt;/publishTf&gt;
+            &lt;publishWheelJointState&gt;true&lt;/publishWheelJointState&gt;
+            &lt;alwaysOn&gt;true&lt;/alwaysOn&gt;
+            &lt;updateRate&gt;100.0&lt;/updateRate&gt;
+            &lt;legacyMode&gt;true&lt;/legacyMode&gt;
+            &lt;leftJoint&gt;left_wheel2base_link&lt;/leftJoint&gt; &lt;!-- 左轮 --&gt;
+            &lt;rightJoint&gt;right_wheel2base_link&lt;/rightJoint&gt; &lt;!-- 右轮 --&gt;
+            &lt;wheelSeparation&gt;${base_link_radius * 2}&lt;/wheelSeparation&gt; &lt;!-- 车轮间距 --&gt;
+            &lt;wheelDiameter&gt;${wheel_radius * 2}&lt;/wheelDiameter&gt; &lt;!-- 车轮直径 --&gt;
+            &lt;broadcastTF&gt;1&lt;/broadcastTF&gt;
+            &lt;wheelTorque&gt;30&lt;/wheelTorque&gt;
+            &lt;wheelAcceleration&gt;1.8&lt;/wheelAcceleration&gt;
+            &lt;commandTopic&gt;cmd_vel&lt;/commandTopic&gt; &lt;!-- 运动控制话题 --&gt;
+            &lt;odometryFrame&gt;odom&lt;/odometryFrame&gt; 
+            &lt;odometryTopic&gt;odom&lt;/odometryTopic&gt; &lt;!-- 里程计话题 --&gt;
+            &lt;robotBaseFrame&gt;base_footprint&lt;/robotBaseFrame&gt; &lt;!-- 根坐标系 --&gt;
+        &lt;/plugin&gt;
+    &lt;/gazebo&gt;
+&lt;/robot&gt;
+
+</code></pre>
+
+<p>​       用\<xacro:include/>标签，将该xacro文件集成到整体的car.urdf.xacro文件中，这里要注意文件存放位置。</p>
+<p>​       运行launch文件，启动gazebo仿真环境，通过命令rostopic list，查看目前已有话题名称，可以看到cmd_vel，运动控制节点话题。</p>
+<p><img alt="" src="../imag/52cmd.png" /></p>
+<p>通过键盘控制节点可以实现键盘控制小车运动</p>
+<pre><code>rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+</code></pre>
+
+<h2 id="7rviz">7、综合运动控制：rviz里程计查看</h2>
+<p>在机器人运动控制的xacro文件中，控制器部分导入了里程计话题</p>
+<pre><code class="xml">&lt;odometryTopic&gt;odom&lt;/odometryTopic&gt; &lt;!-- 里程计话题 --&gt;
+</code></pre>
+
+<p>我们可以在rviz中可视化查看里程计的效果</p>
+<p>（1）通过launch文件打开rviz</p>
+<pre><code class="xml">&lt;launch&gt;
+    &lt;!-- 启动 rviz --&gt;
+    &lt;node pkg=&quot;rviz&quot; type=&quot;rviz&quot; name=&quot;rviz&quot; /&gt;
+
+    &lt;!-- 关节以及机器人状态发布节点 --&gt;
+    &lt;node name=&quot;joint_state_publisher&quot; pkg=&quot;joint_state_publisher&quot; type=&quot;joint_state_publisher&quot; /&gt;
+    &lt;node name=&quot;robot_state_publisher&quot; pkg=&quot;robot_state_publisher&quot; type=&quot;robot_state_publisher&quot; /&gt;
+
+&lt;/launch&gt;
+</code></pre>
+
+<p>（2）添加odometry组件，查看里程计消息</p>
+<p><img alt="" src="" /><img alt="56里程计" src="../imag/56里程计.jpg" /></p>
+<p>（3）添加/odom话题，查看里程计显示</p>
+<p><img alt="" src="../imag/57.png" /></p>
+<p>（4）启动键盘控制话题，控制小车运动，即可实时看到里程计的显示情况</p>
+<pre><code>rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+</code></pre>
+
+<p><img alt="" src="../imag/58显示.jpg" /></p>
+<h2 id="8">8、综合运动控制：雷达信息仿真及显示</h2>
+<p>（1）新建laser.xacro文件并集成到小车模型文件中（include）</p>
+<p>​          编写laser.xacro文件，需要修改对照的部分是：</p>
+<p>​          第三行gazebo reference部分和倒数第五行frame name的名字“laser”，该文件要作用到机器人模型的雷达连杆部分，要找到自己雷达连杆设置的名字并对应修改。该标签上面的topicname话题就是雷达传感器发布数据所用的话题，这里是/scan。</p>
+<pre><code class="xml">&lt;robot name=&quot;my_sensors&quot; xmlns:xacro=&quot;http://wiki.ros.org/xacro&quot;&gt;
+  &lt;!-- 雷达 --&gt;
+  &lt;gazebo reference=&quot;laser&quot;&gt;
+    &lt;sensor type=&quot;ray&quot; name=&quot;rplidar&quot;&gt;雷达类型
+      &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;雷达位姿
+      &lt;visualize&gt;true&lt;/visualize&gt;gazebo是否显示雷达射线
+      &lt;update_rate&gt;5.5&lt;/update_rate&gt;雷达射线的更新频率
+      &lt;ray&gt;
+        &lt;scan&gt;
+          &lt;horizontal&gt;
+            &lt;samples&gt;360&lt;/samples&gt;采样个数：雷达旋转一周采样几个点
+            &lt;resolution&gt;1&lt;/resolution&gt;分辨率：可以设置为整数n，每n个射线测距一次
+            &lt;min_angle&gt;-3&lt;/min_angle&gt;设置雷达的采样范围（180度采样？120度采样？单位是弧度制）
+            &lt;max_angle&gt;3&lt;/max_angle&gt;
+          &lt;/horizontal&gt;
+        &lt;/scan&gt;
+        &lt;range&gt;
+          &lt;min&gt;0.10&lt;/min&gt;雷达有效范围0.1米到30米
+          &lt;max&gt;30.0&lt;/max&gt;
+          &lt;resolution&gt;0.01&lt;/resolution&gt;测量距离的精确度，单位米
+        &lt;/range&gt;
+        &lt;noise&gt;高斯噪音：用于仿真，模拟实际过程中产生的误差
+          &lt;type&gt;gaussian&lt;/type&gt;
+          &lt;mean&gt;0.0&lt;/mean&gt;
+          &lt;stddev&gt;0.01&lt;/stddev&gt;
+        &lt;/noise&gt;
+      &lt;/ray&gt;
+      &lt;plugin name=&quot;gazebo_rplidar&quot; filename=&quot;libgazebo_ros_laser.so&quot;&gt;
+        &lt;topicName&gt;/scan&lt;/topicName&gt;雷达发布消息的话题名
+        &lt;frameName&gt;laser&lt;/frameName&gt;雷达坐标系名
+      &lt;/plugin&gt;
+    &lt;/sensor&gt;
+  &lt;/gazebo&gt;
+&lt;/robot&gt;
+</code></pre>
+
+<p>（2）roslaunch启动env.launch和rviz</p>
+<p>观察gazebo的结果，可以看到仿真中会显示雷达信号的波束</p>
+<p><img alt="" src="../imag/60雷达gazebo.jpg" /></p>
+<p>（3）在RVIZ中进行对应设置，显示雷达信号的组件</p>
+<p>改坐标系Fixed Frames：odom，添加组件laserscan</p>
+<p><img alt="" src="../imag/59雷达组件.jpg" /></p>
+<p>​       topic选择/scan，可以看到rviz中出现了一些红色的点组成的边界，这就是雷达信息得到的信号，可以看到周围环境的障碍物情况</p>
+<p><img alt="" src="../imag/61雷达rviz.png" /></p>
+<h2 id="9">9、综合运动控制：摄像头信息仿真及显示</h2>
+<p>（1）新建camera.xacro文件并集成到机器人模型的xacro文件中（include）</p>
+<p>编写camera.xacro文件,主要需要修改的地方有（类似雷达仿真）：</p>
+<p>gazebo reference：将该文件作用到小车文件的哪个连杆上，要与摄像头的link name保持一致</p>
+<p>frame name：摄像头坐标系名称，同上，与摄像头link name一致</p>
+<pre><code class="xml">&lt;robot name=&quot;my_sensors&quot; xmlns:xacro=&quot;http://wiki.ros.org/xacro&quot;&gt;
+  &lt;!-- 被引用的link --&gt;
+  &lt;gazebo reference=&quot;camera&quot;&gt;
+    &lt;!-- 类型设置为 camara --&gt;
+    &lt;sensor type=&quot;camera&quot; name=&quot;camera_node&quot;&gt;
+      &lt;update_rate&gt;30.0&lt;/update_rate&gt; &lt;!-- 更新频率 --&gt;
+      &lt;!-- 摄像头基本信息设置 --&gt;
+      &lt;camera name=&quot;head&quot;&gt;
+        &lt;horizontal_fov&gt;1.3962634&lt;/horizontal_fov&gt;
+        &lt;image&gt;
+          &lt;width&gt;1280&lt;/width&gt;
+          &lt;height&gt;720&lt;/height&gt;
+          &lt;format&gt;R8G8B8&lt;/format&gt;
+        &lt;/image&gt;
+        &lt;clip&gt;
+          &lt;near&gt;0.02&lt;/near&gt;
+          &lt;far&gt;300&lt;/far&gt;
+        &lt;/clip&gt;
+        &lt;noise&gt;
+          &lt;type&gt;gaussian&lt;/type&gt;
+          &lt;mean&gt;0.0&lt;/mean&gt;
+          &lt;stddev&gt;0.007&lt;/stddev&gt;
+        &lt;/noise&gt;
+      &lt;/camera&gt;
+      &lt;!-- 核心插件 --&gt;
+      &lt;plugin name=&quot;gazebo_camera&quot; filename=&quot;libgazebo_ros_camera.so&quot;&gt;
+        &lt;alwaysOn&gt;true&lt;/alwaysOn&gt;
+        &lt;updateRate&gt;0.0&lt;/updateRate&gt;
+        &lt;cameraName&gt;/camera&lt;/cameraName&gt;
+        &lt;imageTopicName&gt;image_raw&lt;/imageTopicName&gt;
+        &lt;cameraInfoTopicName&gt;camera_info&lt;/cameraInfoTopicName&gt;
+        &lt;frameName&gt;camera&lt;/frameName&gt;
+        &lt;hackBaseline&gt;0.07&lt;/hackBaseline&gt;
+        &lt;distortionK1&gt;0.0&lt;/distortionK1&gt;
+        &lt;distortionK2&gt;0.0&lt;/distortionK2&gt;
+        &lt;distortionK3&gt;0.0&lt;/distortionK3&gt;
+        &lt;distortionT1&gt;0.0&lt;/distortionT1&gt;
+        &lt;distortionT2&gt;0.0&lt;/distortionT2&gt;
+      &lt;/plugin&gt;
+    &lt;/sensor&gt;
+  &lt;/gazebo&gt;
+&lt;/robot&gt;
+</code></pre>
+
+<p>（2）通过roslaunch命令打开gazebo环境和rivz</p>
+<p>gazebo和雷达仿真结果没有区别，现在rviz中添加插件查看摄像头的情况</p>
+<p><img alt="" src="../imag/62camera.png" /></p>
+<p><img alt="" src="../imag/63camera画面.png" /></p>
+<p>小车运动时，也可以看到下面摄像头的画面会随之运动</p>
+<p>可以通过话题发布命令查看运动是的摄像头画面变化，cmd_vel话题，这里可以tab键自动补齐</p>
+<pre><code>rostopic pub -r 10 /cmd_vel geometry_msgs/Twist&quot;linear:
+x:1.0
+y:2.0
+z:0
+angular:
+x:0
+y:0
+z:0.5&quot;
+</code></pre>
+
+<h2 id="10kinect">10、综合运动控制：kinect深度相机仿真</h2>
+<p>kinect：感知障碍物图像和距离信息</p>
+<p>（1）新建文件kinect.xacro并通过include标签集成到car小车模型文件中</p>
+<pre><code class="xml">&lt;xacro:include filename=&quot;my_sensors_kinect.urdf.xacro&quot; /&gt;
+</code></pre>
+
+<p>（2）编写xacro文件</p>
+<p>需要修改的地方主要还是gazebo reference和frame name，修改为作用到哪个连杆的名字</p>
+<pre><code class="xml">&lt;robot name=&quot;my_sensors&quot; xmlns:xacro=&quot;http://wiki.ros.org/xacro&quot;&gt;
+    &lt;gazebo reference=&quot;kinect link名称&quot;&gt;  
+      &lt;sensor type=&quot;depth&quot; name=&quot;camera&quot;&gt;
+        &lt;always_on&gt;true&lt;/always_on&gt;
+        &lt;update_rate&gt;20.0&lt;/update_rate&gt;
+        &lt;camera&gt;
+          &lt;horizontal_fov&gt;${60.0*PI/180.0}&lt;/horizontal_fov&gt;
+          &lt;image&gt;
+            &lt;format&gt;R8G8B8&lt;/format&gt;
+            &lt;width&gt;640&lt;/width&gt;
+            &lt;height&gt;480&lt;/height&gt;
+          &lt;/image&gt;
+          &lt;clip&gt;
+            &lt;near&gt;0.05&lt;/near&gt;
+            &lt;far&gt;8.0&lt;/far&gt;
+          &lt;/clip&gt;
+        &lt;/camera&gt;
+        &lt;plugin name=&quot;kinect_camera_controller&quot; filename=&quot;libgazebo_ros_openni_kinect.so&quot;&gt;
+          &lt;cameraName&gt;camera&lt;/cameraName&gt;话题命名空间
+          &lt;alwaysOn&gt;true&lt;/alwaysOn&gt;
+          &lt;updateRate&gt;10&lt;/updateRate&gt;
+          &lt;imageTopicName&gt;rgb/image_raw&lt;/imageTopicName&gt;图像信息采集话题
+          &lt;depthImageTopicName&gt;depth/image_raw&lt;/depthImageTopicName&gt;深度信息采集话题
+          &lt;pointCloudTopicName&gt;depth/points&lt;/pointCloudTopicName&gt;
+          &lt;cameraInfoTopicName&gt;rgb/camera_info&lt;/cameraInfoTopicName&gt;
+          &lt;depthImageCameraInfoTopicName&gt;depth/camera_info&lt;/depthImageCameraInfoTopicName&gt;
+          &lt;frameName&gt;kinect link名称&lt;/frameName&gt;
+          &lt;baseline&gt;0.1&lt;/baseline&gt;
+          &lt;distortion_k1&gt;0.0&lt;/distortion_k1&gt;
+          &lt;distortion_k2&gt;0.0&lt;/distortion_k2&gt;
+          &lt;distortion_k3&gt;0.0&lt;/distortion_k3&gt;
+          &lt;distortion_t1&gt;0.0&lt;/distortion_t1&gt;
+          &lt;distortion_t2&gt;0.0&lt;/distortion_t2&gt;
+          &lt;pointCloudCutoff&gt;0.4&lt;/pointCloudCutoff&gt;
+        &lt;/plugin&gt;
+      &lt;/sensor&gt;
+    &lt;/gazebo&gt;
+&lt;/robot&gt;
+</code></pre>
+
+<p>（3）roslaunch启动env.launch（gazebo环境）和sensor.launch（rviz环境）即可看到效果</p>
+<p>​        gazebo中的环境会显示出已经配置过的雷达信号，深度相机信息主要通过rviz查看，和添加普通的camera方法一样，在rviz中添加camera组件</p>
+<p><img alt="" src="../imag/64camera.jpg" /></p>
+<p>​       与添加查看普通相机不同的是，此时我们的话题里既有普通相机的话题，也有深度相机的话题，我们在这里选择depth相关话题即可查看深度相机的相关信息。</p>
+<p><img alt="" src="../imag/65depth.png" /></p>
+<p>（4）kinect点云信息显示，在rviz中添加组件pointcloud2并设置topic话题camera/depth/points</p>
+<p><img alt="" src="../imag/66pointcloud.jpg" /></p>
+<p>​        这时会发现在rviz中点云图像信息显示时错位，这是因为在kinect中图像数据与点云数据使用了两套坐标系统，且两套坐标系统位姿并不一致。</p>
+<p><img alt="" src="../imag/67奇怪的点云.jpg" /></p>
+<p>解决方案：</p>
+<p>本来点云使用的是连杆的坐标系，需要修改一下，这里命名为support_depth</p>
+<pre><code class="xml">&lt;frameName&gt;support_depth&lt;/frameName&gt;
+</code></pre>
+
+<p>​       由于该坐标系在机器人模型配置文件中并不存在，所以需要在启动rviz的launch文件中手动配置静态坐标变换信息.</p>
+<p><strong>注意：</strong>这里的args参数分别是xyz位置偏移量，zyx角度偏移量和父级坐标系子级坐标系。</p>
+<pre><code class="xml">&lt;!--添加support到连杆的坐标变换--&gt;
+&lt;node pkg=&quot;tf2_ros&quot; type=&quot;static_transform_publisher&quot; name=&quot;static_transform_publisher&quot; args=&quot;0 0 0 -1.57 0 -1.57 /support /support_depth&quot;
+</code></pre>
+
+<p><img alt="" src="../imag/68正常点云.jpg" /></p>
+<h1 id="_5">十、机器人导航仿真</h1>
+<h2 id="1_7">1、导航定位方式：</h2>
+<p>（1）通过里程计定位:时时收集机器人的速度信息计算并发布机器人坐标系与父级参考系的相对关系。</p>
+<ul>
+<li>优点:里程计定位信息是连续的，没有离散的跳跃。</li>
+<li>缺点:里程计存在累计误差，不利于长距离或长期定位。</li>
+</ul>
+<p>（2）通过传感器定位:通过传感器收集外界环境信息通过匹配计算并发布机器人坐标系与父级参考系的相对关系。</p>
+<ul>
+<li>优点:比里程计定位更精准；</li>
+<li>缺点:传感器定位会出现跳变的情况，且传感器定位在标志物较少的环境下，其定位精度会大打折扣。</li>
+</ul>
+<p>两种定位方式优缺点互补，应用时一般二者结合使用。</p>
+<p>（3）结合使用时的坐标变换关系</p>
+<p>​        两种定位实现中，机器人坐标系一般使用机器人模型中的根坐标系(base_link 或 base_footprint)，里程计定位时，父级坐标系一般称之为 odom，如果通过传感器定位，父级参考系一般称之为 map。当二者结合使用时，map 和 odom 都是机器人模型根坐标系的父级，这是不符合坐标变换中"单继承"的原则的，所以，一般会将转换关系设置为: map -&gt; doom -&gt; base_link 或 base_footprint。</p>
+<h2 id="2slam">2、导航实现：SLAM建图</h2>
+<p>先安装相关的ROS功能包:</p>
+<ul>
+<li>
+<p>安装 gmapping 包(用于构建地图):sudo apt install ros-<ROS版本>-gmapping</p>
+</li>
+<li>
+<p>安装地图服务包(用于保存与读取地图):sudo apt install ros-<ROS版本>-map-server</p>
+</li>
+<li>
+<p>安装 navigation 包(用于定位以及路径规划):sudo apt install ros-<ROS版本>-navigation</p>
+</li>
+</ul>
+<p>新建功能包，并导入依赖: gmapping map_server amcl move_base，其中gampping用于构建地图，map_server用于保存与读取地图，amcl用于定位，move_base用于路径规划</p>
+<p>（1）编写gmapping相关的launch文件</p>
+<p>复制并修改如下:</p>
+<pre><code class="xml">&lt;launch&gt;
+&lt;param name=&quot;use_sim_time&quot; value=&quot;true&quot;/&gt;是否使用仿真时间（仿真时要设置为True）
+    &lt;node pkg=&quot;gmapping&quot; type=&quot;slam_gmapping&quot; name=&quot;slam_gmapping&quot; output=&quot;screen&quot;&gt;
+      &lt;remap from=&quot;scan&quot; to=&quot;scan&quot;/&gt;设置雷达话题，前面仿真雷达设置的话题就是scan
+      &lt;param name=&quot;base_frame&quot; value=&quot;base_footprint&quot;/&gt;&lt;!--底盘坐标系--&gt;
+      &lt;param name=&quot;odom_frame&quot; value=&quot;odom&quot;/&gt; &lt;!--里程计坐标系--&gt;
+      &lt;param name=&quot;map_update_interval&quot; value=&quot;5.0&quot;/&gt;地图更新频率间隔
+      &lt;param name=&quot;maxUrange&quot; value=&quot;16.0&quot;/&gt;雷达测试范围最大16m
+      &lt;param name=&quot;sigma&quot; value=&quot;0.05&quot;/&gt;
+      &lt;param name=&quot;kernelSize&quot; value=&quot;1&quot;/&gt;
+      &lt;param name=&quot;lstep&quot; value=&quot;0.05&quot;/&gt;
+      &lt;param name=&quot;astep&quot; value=&quot;0.05&quot;/&gt;
+      &lt;param name=&quot;iterations&quot; value=&quot;5&quot;/&gt;
+      &lt;param name=&quot;lsigma&quot; value=&quot;0.075&quot;/&gt;
+      &lt;param name=&quot;ogain&quot; value=&quot;3.0&quot;/&gt;
+      &lt;param name=&quot;lskip&quot; value=&quot;0&quot;/&gt;
+      &lt;param name=&quot;srr&quot; value=&quot;0.1&quot;/&gt;
+      &lt;param name=&quot;srt&quot; value=&quot;0.2&quot;/&gt;
+      &lt;param name=&quot;str&quot; value=&quot;0.1&quot;/&gt;
+      &lt;param name=&quot;stt&quot; value=&quot;0.2&quot;/&gt;
+      &lt;param name=&quot;linearUpdate&quot; value=&quot;1.0&quot;/&gt;
+      &lt;param name=&quot;angularUpdate&quot; value=&quot;0.5&quot;/&gt;
+      &lt;param name=&quot;temporalUpdate&quot; value=&quot;3.0&quot;/&gt;
+      &lt;param name=&quot;resampleThreshold&quot; value=&quot;0.5&quot;/&gt;
+      &lt;param name=&quot;particles&quot; value=&quot;30&quot;/&gt;
+      &lt;param name=&quot;xmin&quot; value=&quot;-50.0&quot;/&gt;
+      &lt;param name=&quot;ymin&quot; value=&quot;-50.0&quot;/&gt;
+      &lt;param name=&quot;xmax&quot; value=&quot;50.0&quot;/&gt;
+      &lt;param name=&quot;ymax&quot; value=&quot;50.0&quot;/&gt;
+      &lt;param name=&quot;delta&quot; value=&quot;0.05&quot;/&gt;
+      &lt;param name=&quot;llsamplerange&quot; value=&quot;0.01&quot;/&gt;
+      &lt;param name=&quot;llsamplestep&quot; value=&quot;0.01&quot;/&gt;
+      &lt;param name=&quot;lasamplerange&quot; value=&quot;0.005&quot;/&gt;
+      &lt;param name=&quot;lasamplestep&quot; value=&quot;0.005&quot;/&gt;
+    &lt;/node&gt;
+
+    &lt;node pkg=&quot;joint_state_publisher&quot; name=&quot;joint_state_publisher&quot; type=&quot;joint_state_publisher&quot; /&gt;
+    &lt;node pkg=&quot;robot_state_publisher&quot; name=&quot;robot_state_publisher&quot; type=&quot;robot_state_publisher&quot; /&gt;
+
+    &lt;node pkg=&quot;rviz&quot; type=&quot;rviz&quot; name=&quot;rviz&quot; /&gt;
+    &lt;!-- 可以保存 rviz 配置并后期直接使用--&gt;
+    &lt;!--
+    &lt;node pkg=&quot;rviz&quot; type=&quot;rviz&quot; name=&quot;rviz&quot; args=&quot;-d $(find my_nav_sum)/rviz/gmapping.rviz&quot;/&gt;
+    --&gt;
+&lt;/launch&gt;
+</code></pre>
+
+<p>（2）启动Gazebo仿真环境和编写好的slam.launch文件</p>
+<p>（3）在RVIZ中添加组件</p>
+<ul>
+<li>
+<p>添加机器人模型RobotModel</p>
+</li>
+<li>
+<p>添加Laserscan并设置Topic话题scan</p>
+</li>
+<li>
+<p>添加坐标系组件TF，Fram下即可找到map，odom</p>
+</li>
+<li>
+<p>添加map组件用于建图，设置topic，发布话题栅格地图数据，这里设置为map</p>
+</li>
+</ul>
+<p>即可看到如下效果：</p>
+<p><img alt="" src="../imag/69gmapping.jpg" /></p>
+<p>（4）在rviz中配置好之后，可以将目前配置保存：左上角save config as，保存到该功能包的config文件夹下，并在rivz启动中添加参数，以后启动就可以自动配置。</p>
+<pre><code class="xml">&lt;node pkg=&quot;rviz&quot; type=&quot;rviz&quot; name=&quot;rviz&quot; args=&quot;-d $find(功能包名) 功能包内的相对路径&quot;/&gt;
+</code></pre>
+
+<p>（5）启动键盘控制节点</p>
+<pre><code class="shell">rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+</code></pre>
+
+<p>控制小车运动，绕着地图走一圈建图。</p>
+<p>建图结果如图所示，白色部分是无障碍物可以走的地方，黑色圈出部位为障碍物信息</p>
+<p><img alt="" src="../imag/70SLAM建图.jpg" /></p>
+<p>（6）保存地图（map_server包里的map_save）</p>
+<p>如果直接关闭rviz退出，那么建好的地图将会消失，所以要编写launch文件进行保存操作</p>
+<pre><code class="xml">&lt;launch&gt;
+    &lt;arg name=&quot;filename&quot; value=&quot;$(find mycar_nav)/map/nav&quot; /&gt;
+    &lt;node name=&quot;map_save&quot; pkg=&quot;map_server&quot; type=&quot;map_saver&quot; args=&quot;-f $(arg filename)&quot; /&gt;
+&lt;/launch&gt;
+</code></pre>
+
+<p>可以看到在指定路径下产生了两个文件map_save.pgm和map_save.yaml</p>
+<p><img alt="" src="../imag/71地图保存.jpg" /></p>
+<p>（7）读取地图信息（map_server包里的map_server）</p>
+<p>新建launch文件，使用map_server调用上一步保存的map_save.yaml文件</p>
+<p>代码示例如下</p>
+<pre><code class="xml">&lt;launch&gt;
+    &lt;node pkg=&quot;map_server&quot; type=&quot;map_server&quot; name=&quot;map_server&quot; args=&quot;$(find 功能包名)/功能包内到yaml文件的路径&quot;/&gt;
+&lt;/launch&gt;
+</code></pre>
+
+<p>​        这样，我们之前发布的信息就会以话题的形式发布了，要看到地图的可视化效果我们需要借助rviz，可以在终端打开rviz并加入map插件，选择topic为map，即可看到效果。</p>
+<p><img alt="" src="../imag/72地图查看.png" /></p>
+<h2 id="3amcl">3、导航实现：amcl定位</h2>
+<p>（1）首先编写启动amcl的launch文件，这里建议复制粘贴模板，再修改相关的参数即可，步骤如下：</p>
+<ul>
+<li>~主目录下进入amcl文件:roscd amcl</li>
+<li>ls查看文件组成，ls examples进入查看examples示例文件</li>
+<li>example中提供了两种示例文件，amcl_diff是差速机器人，amcl_omni是全向机器人</li>
+<li>通过文本编辑器gedit进入对应的launch文件，这里我们选择amcl_diff文件</li>
+<li>gedit example/amcl_diff.launch</li>
+<li>复制到我们自己新建的launch文件中即可</li>
+</ul>
+<p>（2）修改launch文件</p>
+<p>示例中已经设置了odom坐标系，此外还需添加机器人坐标系和地图坐标系，这里设置机器人基坐标系为base_footprint，地图坐标系可以选择暂不设置，使用默认的globalmap</p>
+<pre><code class="xml">&lt;launch&gt;
+&lt;node pkg=&quot;amcl&quot; type=&quot;amcl&quot; name=&quot;amcl&quot; output=&quot;screen&quot;&gt;
+  &lt;!-- Publish scans from best pose at a max of 10 Hz --&gt;
+  &lt;param name=&quot;odom_model_type&quot; value=&quot;diff&quot;/&gt;&lt;!-- 里程计模式为差分 --&gt;
+  &lt;param name=&quot;odom_alpha5&quot; value=&quot;0.1&quot;/&gt;
+  &lt;param name=&quot;transform_tolerance&quot; value=&quot;0.2&quot; /&gt;
+  &lt;param name=&quot;gui_publish_rate&quot; value=&quot;10.0&quot;/&gt;
+  &lt;param name=&quot;laser_max_beams&quot; value=&quot;30&quot;/&gt;
+  &lt;param name=&quot;min_particles&quot; value=&quot;500&quot;/&gt;
+  &lt;param name=&quot;max_particles&quot; value=&quot;5000&quot;/&gt;
+  &lt;param name=&quot;kld_err&quot; value=&quot;0.05&quot;/&gt;
+  &lt;param name=&quot;kld_z&quot; value=&quot;0.99&quot;/&gt;
+  &lt;param name=&quot;odom_alpha1&quot; value=&quot;0.2&quot;/&gt;
+  &lt;param name=&quot;odom_alpha2&quot; value=&quot;0.2&quot;/&gt;
+  &lt;!-- translation std dev, m --&gt;
+  &lt;param name=&quot;odom_alpha3&quot; value=&quot;0.8&quot;/&gt;
+  &lt;param name=&quot;odom_alpha4&quot; value=&quot;0.2&quot;/&gt;
+  &lt;param name=&quot;laser_z_hit&quot; value=&quot;0.5&quot;/&gt;
+  &lt;param name=&quot;laser_z_short&quot; value=&quot;0.05&quot;/&gt;
+  &lt;param name=&quot;laser_z_max&quot; value=&quot;0.05&quot;/&gt;
+  &lt;param name=&quot;laser_z_rand&quot; value=&quot;0.5&quot;/&gt;
+  &lt;param name=&quot;laser_sigma_hit&quot; value=&quot;0.2&quot;/&gt;
+  &lt;param name=&quot;laser_lambda_short&quot; value=&quot;0.1&quot;/&gt;
+  &lt;param name=&quot;laser_lambda_short&quot; value=&quot;0.1&quot;/&gt;
+  &lt;param name=&quot;laser_model_type&quot; value=&quot;likelihood_field&quot;/&gt;
+  &lt;!-- &lt;param name=&quot;laser_model_type&quot; value=&quot;beam&quot;/&gt; --&gt;
+  &lt;param name=&quot;laser_likelihood_max_dist&quot; value=&quot;2.0&quot;/&gt;
+  &lt;param name=&quot;update_min_d&quot; value=&quot;0.2&quot;/&gt;
+  &lt;param name=&quot;update_min_a&quot; value=&quot;0.5&quot;/&gt;
+
+  &lt;param name=&quot;odom_frame_id&quot; value=&quot;odom&quot;/&gt;&lt;!-- 里程计坐标系 --&gt;
+  &lt;param name=&quot;base_frame_id&quot; value=&quot;base_footprint&quot;/&gt;&lt;!-- 添加机器人基坐标系 --&gt;
+  &lt;param name=&quot;global_frame_id&quot; value=&quot;map&quot;/&gt;&lt;!-- 添加地图坐标系 --&gt;
+
+  &lt;param name=&quot;resample_interval&quot; value=&quot;1&quot;/&gt;
+  &lt;param name=&quot;transform_tolerance&quot; value=&quot;0.1&quot;/&gt;
+  &lt;param name=&quot;recovery_alpha_slow&quot; value=&quot;0.0&quot;/&gt;
+  &lt;param name=&quot;recovery_alpha_fast&quot; value=&quot;0.0&quot;/&gt;
+&lt;/node&gt;
+&lt;/launch&gt;
+</code></pre>
+
+<p>（3）编写测试文件</p>
+<p>包括启动rviz，启动地图服务，启动amcl定位</p>
+<p>（4）启动gazebo仿真环境、启动amcl.launch文件、启动键盘控制小车运动节点（teleop_twist_keyboard），这样，gazebo环境、rviz环境都正常打开并可以控制小车运动。</p>
+<p>（5）接下来在RVIZ中添加组件</p>
+<ul>
+<li>
+<p>RobotModel显示机器人模型</p>
+</li>
+<li>
+<p>map组件显示地图</p>
+</li>
+<li>
+<p>posearray显示定位结果</p>
+</li>
+</ul>
+<p><img alt="" src="../imag/73定位.jpg" /></p>
+<p>（6）观察结果</p>
+<p>启用键盘控制，在rviz中即可看到位置动态变化估计</p>
+<p><img alt="" src="../imag/74控制.png" /></p>
+<h2 id="4_1">4、导航实现之路径规划</h2>
+<p>​        move_base 功能包提供了基于动作(action)的路径规划实现，move_base 可以根据给定的目标点，控制机器人底盘运动至目标位置，并且在运动过程中会连续反馈机器人自身的姿态与目标点的状态信息，move_base主要由全局路径规划与本地路径规划组成。</p>
+<p>​        move_base已经被集成到了navigation包，可以通过如下命令安装：</p>
+<pre><code class="shell">sudo apt install ros-&lt;ROS版本&gt;-navigation
+</code></pre>
+
+<p>（1）构建适用于机器人导航的代价地图</p>
+<p>​       由于导航过程中，障碍物信息是可变的，导航时机器人需要实时获取当前的障碍物信息，且机器人在靠近障碍物边缘时，可能会由于惯性、机器人体的不规则外形，在转弯等过程中发生碰撞，SLAM构建的静态地图在导航中是不可以直接使用的，需要构建实时获取数据和障碍物膨胀后的代价地图。</p>
+<p>代价地图：</p>
+<ul>
+<li>
+<p>全局代价地图（全局路径规划）</p>
+</li>
+<li>
+<p>本地代价地图（本地路径规划）</p>
+</li>
+</ul>
+<p>（2）使用move_base功能包编写路径规划相关得launch文件</p>
+<p>复制调用模板，将功能包修改为自己功能包得名字</p>
+<pre><code class="xml">&lt;launch&gt;
+
+    &lt;node pkg=&quot;move_base&quot; type=&quot;move_base&quot; respawn=&quot;false&quot; name=&quot;move_base&quot; output=&quot;screen&quot; clear_params=&quot;true&quot;&gt;
+        &lt;rosparam file=&quot;$(find 功能包)/param/costmap_common_params.yaml&quot; command=&quot;load&quot; ns=&quot;global_costmap&quot; /&gt;
+        &lt;rosparam file=&quot;$(find 功能包)/param/costmap_common_params.yaml&quot; command=&quot;load&quot; ns=&quot;local_costmap&quot; /&gt;
+        &lt;rosparam file=&quot;$(find 功能包)/param/local_costmap_params.yaml&quot; command=&quot;load&quot; /&gt;
+        &lt;rosparam file=&quot;$(find 功能包)/param/global_costmap_params.yaml&quot; command=&quot;load&quot; /&gt;
+        &lt;rosparam file=&quot;$(find 功能包)/param/base_local_planner_params.yaml&quot; command=&quot;load&quot; /&gt;
+    &lt;/node&gt;
+
+&lt;/launch&gt;
+</code></pre>
+
+<p>（3）设置配置文件</p>
+<p>在功能包里新建文件夹命名为param，将上文中得launch文件里涉及的配置文件名新建到这个文件夹中</p>
+<p>粘贴标准例程中的代码，把各种坐标系名称和机器人几何参数修改到与自己的项目匹配。</p>
+<ul>
+<li>
+<h6 id="costmap_common_paramsyaml">costmap_common_params.yaml</h6>
+</li>
+</ul>
+<p>该文件是move_base 在全局路径规划与本地路径规划时调用的通用参数，包括:机器人的尺寸、距离障碍物的安全距离、传感器信息等。配置参考如下:</p>
+<pre><code class="yaml">#机器人几何参，如果机器人是圆形，设置 robot_radius,如果是其他形状设置 footprint
+robot_radius: 0.12 #圆形
+# footprint: [[-0.12, -0.12], [-0.12, 0.12], [0.12, 0.12], [0.12, -0.12]] #其他形状
+
+obstacle_range: 3.0 # 用于障碍物探测，比如: 值为 3.0，意味着检测到距离小于 3 米的障碍物时，就会引入代价地图
+raytrace_range: 3.5 # 用于清除障碍物，比如：值为 3.5，意味着清除代价地图中 3.5 米以外的障碍物
+
+
+#膨胀半径，扩展在碰撞区域以外的代价区域，使得机器人规划路径避开障碍物
+inflation_radius: 0.2
+#代价比例系数，越大则代价值越小
+cost_scaling_factor: 3.0
+
+#地图类型
+map_type: costmap
+#导航包所需要的传感器
+observation_sources: scan
+#对传感器的坐标系和数据进行配置。这个也会用于代价地图添加和清除障碍物。例如，你可以用激光雷达传感器用于在代价地图添加障碍物，再添加kinect用于导航和清除障碍物。
+scan: {sensor_frame: laser, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+Copy
+</code></pre>
+
+<h6 id="_6"></h6>
+<ul>
+<li>
+<h6 id="global_costmap_paramsyaml">global_costmap_params.yaml</h6>
+</li>
+</ul>
+<p>该文件用于全局代价地图参数设置:</p>
+<pre><code class="yaml">global_costmap:
+  global_frame: map #地图坐标系
+  robot_base_frame: base_footprint #机器人坐标系
+  # 以此实现坐标变换
+
+  update_frequency: 1.0 #代价地图更新频率
+  publish_frequency: 1.0 #代价地图的发布频率
+  transform_tolerance: 0.5 #等待坐标变换发布信息的超时时间
+
+  static_map: true # 是否使用一个地图或者地图服务器来初始化全局代价地图，如果不使用静态地图，这个参数为false.
+Copy
+</code></pre>
+
+<ul>
+<li>
+<h6 id="local_costmap_paramsyaml">local_costmap_params.yaml</h6>
+</li>
+</ul>
+<p>该文件用于局部代价地图参数设置:</p>
+<pre><code class="yaml">local_costmap:
+  global_frame: odom #里程计坐标系
+  robot_base_frame: base_footprint #机器人坐标系
+
+  update_frequency: 10.0 #代价地图更新频率
+  publish_frequency: 10.0 #代价地图的发布频率
+  transform_tolerance: 0.5 #等待坐标变换发布信息的超时时间
+
+  static_map: false  #不需要静态地图，可以提升导航效果
+  rolling_window: true #是否使用动态窗口，默认为false，在静态的全局地图中，地图不会变化
+  width: 3 # 局部地图宽度 单位是 m
+  height: 3 # 局部地图高度 单位是 m
+  resolution: 0.05 # 局部地图分辨率 单位是 m，一般与静态地图分辨率保持一致
+Copy
+</code></pre>
+
+<ul>
+<li>
+<h6 id="base_local_planner_params">base_local_planner_params</h6>
+</li>
+</ul>
+<p>基本的局部规划器参数配置，这个配置文件设定了机器人的最大和最小速度限制值，也设定了加速度的阈值。</p>
+<pre><code class="yaml">TrajectoryPlannerROS:
+
+# Robot Configuration Parameters
+  max_vel_x: 0.5 # X 方向最大速度
+  min_vel_x: 0.1 # X 方向最小速速
+
+  max_vel_theta:  1.0 # 
+  min_vel_theta: -1.0
+  min_in_place_vel_theta: 1.0
+
+  acc_lim_x: 1.0 # X 加速限制
+  acc_lim_y: 0.0 # Y 加速限制
+  acc_lim_theta: 0.6 # 角速度加速限制
+
+# Goal Tolerance Parameters，目标公差
+  xy_goal_tolerance: 0.10
+  yaw_goal_tolerance: 0.05
+
+# Differential-drive robot configuration
+# 是否是全向移动机器人
+  holonomic_robot: false
+
+# Forward Simulation Parameters，前进模拟参数
+  sim_time: 0.8
+  vx_samples: 18
+  vtheta_samples: 20
+  sim_granularity: 0.05
+</code></pre>
+
+<p>（4）新建launch文件，将需要的map_server服务、amcl服务、rviz启动集成</p>
+<pre><code class="xml">&lt;launch&gt;
+    &lt;!-- 设置地图的配置文件 --&gt;
+    &lt;arg name=&quot;map&quot; default=&quot;nav.yaml&quot; /&gt;
+    &lt;!-- 运行地图服务器，并且加载设置的地图--&gt;
+    &lt;node name=&quot;map_server&quot; pkg=&quot;map_server&quot; type=&quot;map_server&quot; args=&quot;$(find navigation)/map/$(arg map)&quot;/&gt;
+    &lt;!-- 启动AMCL节点 --&gt;
+    &lt;include file=&quot;$(find navigation)/launch/amcl.launch&quot; /&gt;
+
+    &lt;!-- 运行move_base节点 --&gt;
+    &lt;include file=&quot;$(find navigation)/launch/path.launch&quot; /&gt;
+    &lt;!-- 运行rviz --&gt;
+    &lt;node pkg=&quot;rviz&quot; type=&quot;rviz&quot; name=&quot;rviz&quot; args=&quot;-d $(find navigation)/rviz/navigation_test.rviz&quot; /&gt;
+
+&lt;/launch&gt;
+</code></pre>
+
+<p>（5）启动gazebo仿真环境，运行集成后的launch文件，即可实现导航</p>
+<p>（6）测试，可以看到gazebo和rviz都启动了，添加rviz组件：RobotModel、Map、Posearray、odometry</p>
+<p><img alt="" src="../imag/75导航.png" /></p>
+<p>通过菜单栏上方的2D Nav Goal设置目标点，会发现小车会自行朝目标点运动</p>
+<p>​        此外，我们还可以通过继续选择map的不同话题，得到全局和局部的代价地图（如下图所示），也可以选择添加Path，看到全局路径规划和局部路径规划的可视化结果</p>
+<p><img alt="" src="../imag/76路径规划.jpg" /></p>
+<p>​        如果机器人出现走的不稳的情况，摇摇晃晃的，那么可以去配置文件中的base_local_planner_param中设置前进模拟参数，将sim_time调的稍微大些</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
