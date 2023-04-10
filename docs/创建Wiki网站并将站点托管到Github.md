@@ -2,11 +2,11 @@
 
 **使用工具：mkdocs和git命令**
 
-## 1、mkdocs：
+## 1、mkdocs简介
 
 ​        MkDocs是一个快速、简单、完全华丽的静态站点生成器，用于构建项目文档。文档源文件基于python，以 Markdown 格式编写，并使用单个 YAML 配置文件进行配置，可以将生成的网站部署到任何地方。
 
-## 2、mkdocs安装：
+## 2、mkdocs安装
 
 linux系统采用命令行安装：
 
@@ -22,7 +22,7 @@ windows用户同样到cmd终端通过运行以下命令安装：
 pip install mkdocs
 ```
 
-## 3、mkdocs版本检查：
+## 3、mkdocs版本检查
 
 ```
 mkdocs --version
@@ -30,7 +30,7 @@ mkdocs --version
 
 正常情况下，如果正确安装就可以看到mkdocs的版本信息
 
-![](D:\研\深度学习算法\ROS\imagwiki\1mkdocs版本.png)
+![](imagwiki/1mkdocs版本.png)
 
 ## 4、创建wiki
 
@@ -52,7 +52,7 @@ cd my_wiki
 
 项目创建成功后可以看到：
 
-![](imagwiki\2mkdocs_new.png)
+![](imagwiki/2mkdocs_new.png)
 
 ​       多了新的文件夹my_wiki，且文件夹里自动生成了文件夹docs用于存放md文件，这里已经生成了示例文件index.md。另外my_wiki文件夹里还有用于渲染网页的配置文件mkdocs.yaml
 
@@ -67,11 +67,11 @@ mkdocs serve
 
 之后终端中会出现如下提示：
 
-![](imagwiki\3预览wiki.png)
+![](imagwiki/3预览wiki.png)
 
 复制提示的网址信息http://127.0.0.1:8000，粘贴到浏览器访问即可看到预览信息
 
-![](imagwiki\4初始网页.png)
+![](imagwiki/4初始网页.png)
 
 在终端中退出预览，可以开始编辑我们的个性化网站
 
@@ -83,7 +83,7 @@ ctrl+c
 
 ​        编辑网站可以选择在原始的index.md按照markdown语法进行修改，也可以将自己已经编写好的md文档复制到该路径。当有多个md文件共存时，会在左上角并列显示，可以选择。
 
-![](imagwiki\5多个文件.png)
+![](imagwiki/5多个文件.png)
 
 ### （4）插入图片
 
@@ -98,7 +98,7 @@ ctrl+c
 - 相对路径书写为绝对路径会导致找不到图片
 - 相对路径的斜杠和反斜杠书写错误，windows下是以斜杠方式查找路径而linux下是反斜杠，所以复制过来，系统不一样的要注意检查啦
 
-![](imagwiki\6路径问题.png)
+![](imagwiki/6路径问题.png)
 
 上图就是不注意相对路径的书写方式（斜杠/和反斜杠\用错）导致找不到图片报错。
 
@@ -152,11 +152,11 @@ material是一个mkdocs主题，它的优点：
 
 示例： https://github.com/user_name/repository_name
 
-![](imagwiki\7建仓库示例.jpg)
+![](imagwiki/7建仓库示例.jpg)
 
 可以看到后面已经提示了我们如果需要远程push一个仓库到这里需要怎么做
 
-![](imagwiki\8push仓库.png)
+![](imagwiki/8push仓库.png)
 
 ### （2）初始化本地仓库
 
@@ -167,7 +167,7 @@ cd my_wiki
 git init 
 ```
 
-![](imagwiki\9初始化.png)
+![](imagwiki/9初始化.png)
 
 ​     可以看到这里会创建一个.git的文件夹，这里在my_wiki中看不到，如果想要看到需要选中显示隐藏文件夹
 
@@ -187,7 +187,7 @@ git add .
 git commit -m"first version"
 ```
 
-![](imagwiki\10commit.png)
+![](imagwiki/10commit.png)
 
 ### （5）推送到远程仓库
 
@@ -203,7 +203,7 @@ git push -u origin main
 
 注意这里也有可能是master，如果报错可以尝试修改为master再次运行
 
-![](D:\研\深度学习算法\ROS\imagwiki\11main.png)
+![](imagwiki/11main.png)
 
 ​        由于github都是实名制维护，所以这里如果你是第一次进行仓库维护提交，在提交时他会报错问你的名字邮箱，如实填写即可。
 
@@ -229,27 +229,27 @@ git config --global user.name "gitHub用户名"
 
 ​        接下来正常push，它会问你的github账号密码。但是这里账号密码的方式在2021年已经废弃了，如果你依然输入账号密码它会报错"support for password authentication was removed on August 13,2021"，让你通过token方式进行身份验证。
 
-![](imagwiki\12密码.jpg)
+![](imagwiki/12密码.jpg)
 
 此时将密码换成个人token粘贴进去，即可成功托管到github。
 
-![](imagwiki\12成功密码.png)
+![](imagwiki/12成功密码.png)
 
 没有token的小伙伴不要担心，后面会补充获取个人github的token方法。
 
 ### （6）补充github的token验证方法
 
-![](imagwiki\13token.png)
+![](imagwiki/13token.png)
 
 进去之后拉到最下面
 
-![](imagwiki\14token.png)
+![](imagwiki/14token.png)
 
-![](imagwiki\15token.jpg)
+![](imagwiki/15token.jpg)
 
 ​        接下来填入基本信息后按需选择赋予该令牌的权限，需要注意的是，如果要远程push仓库进去，至少要勾选第一个选项，不然后面会没有权限。
 
-![](imagwiki\16token.png)
+![](imagwiki/16token.png)
 
 设置完之后会出现token，**请务必复制粘贴备份！！**这个以后你将无法查看第二次。
 
@@ -267,9 +267,9 @@ mkdocs gh-deploy
 
 ​        即可一键部署，这里会再次要求输入github 的账号密码，还按照上面操作即可，将密码换成个人token，这里最终会生成一个网址，这个网址就是我们网页的访问地址啦（组成是github个人账号网址加仓库名）
 
-![](imagwiki\17结果.jpg)
+![](imagwiki/17结果.jpg)
 
 ​        这里可能需要等上几分钟，一开始会出现404 not found，这个是正常现象，因为部署需要一定时间，稍等片刻再访问就好啦~部署结果预览如下图所示
 
-![](imagwiki\18网页结果.png)
+![](imagwiki/18网页结果.png)
 
